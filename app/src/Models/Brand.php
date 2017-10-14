@@ -4,19 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Brand extends Model
 {
-  protected $table = "User";
-  protected $primarykey ='id_user';
+  protected $table = "Brand";
+  protected $primarykey ='id_brand';
   public $timestamps=true;
 
   public function shoes(){
 		return $this->hasMany('\App\Models\Shoes','id_shoes');  
-	}
-
-
-  public function order(){
-		return $this->hasOne('\App\Models\Order','id_order');  
 	}
 
 }

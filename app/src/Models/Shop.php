@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Shop extends Model
 {
-  protected $table = "User";
-  protected $primarykey ='id_user';
+  protected $table = "Shop";
+  protected $primarykey ='id_shop';
   public $timestamps=true;
 
   public function shoes(){
@@ -15,8 +15,8 @@ class User extends Model
 	}
 
 
-  public function order(){
-		return $this->hasOne('\App\Models\Order','id_order');  
+  public function city(){
+		return $this->belongsTo('\App\Models\City','id_city');  
 	}
 
 }
