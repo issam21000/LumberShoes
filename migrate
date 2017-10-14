@@ -16,8 +16,8 @@ class Migrator {
         /**
          * create table for sentinel user
          */
-        if (!Capsule::schema()->hasTable('user')) {
-            Capsule::schema()->create('user', function($table)
+        if (!Capsule::schema()->hasTable('User')) {
+            Capsule::schema()->create('User', function($table)
             {
                 $table->increments('id_user');
                 $table->string('full_name');
@@ -37,8 +37,8 @@ class Migrator {
         /**
          * create table for sentinel order
          */
-        if (!Capsule::schema()->hasTable('order')) {
-            Capsule::schema()->create('order', function($table)
+        if (!Capsule::schema()->hasTable('Order')) {
+            Capsule::schema()->create('Order', function($table)
             {
                 $table->increments('id_order');
                 $table->integer('id_user');
@@ -59,8 +59,8 @@ class Migrator {
         /**
          * create order_line table
          */
-        if (!Capsule::schema()->hasTable('order_line')) {
-            Capsule::schema()->create('order_line', function($table)
+        if (!Capsule::schema()->hasTable('Order_line')) {
+            Capsule::schema()->create('Order_line', function($table)
             {
                 $table->increments('id_order_line');
 				$table->integer('id_shoes');
@@ -79,8 +79,8 @@ class Migrator {
 		/**
          * create shoes table
          */
-        if (!Capsule::schema()->hasTable('shoes')) {
-            Capsule::schema()->create('shoes', function($table)
+        if (!Capsule::schema()->hasTable('Shoes')) {
+            Capsule::schema()->create('Shoes', function($table)
             {
 				$table->increments('id_shoes');
                 $table->integer('id_brand');
@@ -105,8 +105,8 @@ class Migrator {
 		/**
          * create brand table
          */
-        if (!Capsule::schema()->hasTable('brand')) {
-            Capsule::schema()->create('brand', function($table)
+        if (!Capsule::schema()->hasTable('Brand')) {
+            Capsule::schema()->create('Brand', function($table)
             {
 				$table->increments('id_brand');
                 $table->string('legend');
@@ -121,8 +121,8 @@ class Migrator {
 		/**
          * create shop table
          */
-        if (!Capsule::schema()->hasTable('shop')) {
-            Capsule::schema()->create('shop', function($table)
+        if (!Capsule::schema()->hasTable('Shop')) {
+            Capsule::schema()->create('Shop', function($table)
             {
                 $table->increments('id_shop');
 				$table->integer('id_city');
@@ -143,8 +143,8 @@ class Migrator {
         /**
          * create city table
          */
-        if (!Capsule::schema()->hasTable('city')) {
-            Capsule::schema()->create('city', function($table)
+        if (!Capsule::schema()->hasTable('City')) {
+            Capsule::schema()->create('City', function($table)
             {
                 $table->increments('id_city');
                 $table->string('name');
