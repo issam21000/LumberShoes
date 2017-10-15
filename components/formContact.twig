@@ -1,0 +1,50 @@
+{% include 'header.twig' %}
+
+<h2 class="section-container"> Contactez nous </h2>
+
+		<form name="contact"  method="post" action="/issam/ShoesRental/index.php/contact/envoyer">
+
+				<div>			
+					<label for="name">Nom </label>
+					<span class="required">*</span><br>
+					<input class= form-control id="name" type="text" name="name" placeholder="Entrez votre nom"/><br>
+
+				</div>
+
+				<div>
+					<label for="prenom">Prénom  </label><br>
+					<input class= form-control id="prenom" type="text" name="prenom" placeholder="Entrez votre prénom"/><br>
+					
+				</div>
+
+				<div>
+					<label for="mail">E-mail </label>
+					<span class="required">*</span><br>
+					<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"><br>
+					
+				</div>
+
+				<div>
+					<label for="téléphone">Téléphone </label><br>
+					<input class= form-control id="téléphone" type="text" name="téléphone" placeholder="Entrez votre numéro de Téléphone"/><br>		
+				</div>
+
+				<div>
+					<label for="sujet">Sujet </label>
+					<span class="required">*</span><br>
+					<input class= form-control id="sujet" type="text" name="subject" placeholder="Sujet"/><br>		
+				</div>
+					<label for="message">Message </label>
+					<span class="required">*</span><br>
+					<textarea class= form-control name="message" cols="30" rows="8" placeholder="Saisissez votre message..."></textarea><br>
+
+
+					<div >
+						<button class="btn btn-success" type="submit" value="envoyer" name="bouttonEnvoyer">Envoyer</button>
+					</div>
+
+				</div>
+				
+		</form>
+		<br>
+{% include 'footer.twig' %}
