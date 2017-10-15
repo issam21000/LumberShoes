@@ -1,0 +1,144 @@
+
+
+span.required{
+	color:#FF0000;
+}
+
+.section-container{
+	background-color:#D3D3D3;
+	text-align: center;
+	padding: 2px 0 4px 0;
+	margin-top: 5%;
+}
+
+.inscription{
+	margin-bottom: 1%;
+	box-sizing: border-box;
+	width: 100%;
+}
+.c form.form-horizontal{
+	padding-bottom: 2%;
+	
+}
+h4{
+	border-bottom: 1px solid #ccd3dd;
+	text-align: left;
+	font-weight: bold;
+	margin-left: 30%;
+	padding-bottom: 2%;
+	
+}
+
+.connexion h4{
+	text-align: left;
+	margin-left: 0;
+	width: 120%;
+}
+
+.cont{
+	display:flex;
+	flex-direction: row;
+}
+
+.paragraph{
+	color:#798da8;
+	padding: .85em 0 1.2em;
+    box-sizing: border-box;
+    width:44%;
+    font-size: .917em;
+    text-align: justify;
+    margin-left: 56%;
+    line-height: 1em;
+}
+
+body{
+	margin:1%;
+}
+
+.header {
+	border:2px solid black;
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(#727272,#000000);
+}
+
+footer {
+	border:2px solid black;
+	width: 100%;
+	height: 100px;
+	background: linear-gradient(#727272,#000000);
+	text-align: center;
+}
+.header a.enregistrer{
+	float:right;
+	text-decoration: none;
+	color:#ddd;
+	text-align: center;
+	margin-right: 3%;
+	font-weight: bold;
+	vertical-align:middle;
+	margin-left:2%;
+	margin-top: 2.5%;
+	font-size: 1.3em;
+}
+.header a.enregistrer:hover{
+	color: #FFFFFF;
+}
+
+ul{
+	display:flex;
+	flex-direction: row;
+	padding-left: 3%;
+}
+
+ul li{
+	list-style: none;
+	padding-top: 1%;
+	padding-right: 5%;
+	}
+.button ul li a{
+	text-decoration: none;
+	color:#ddd;
+	font-weight: bold;
+	font-size: 1.3em;	
+	display:flex;
+	flex-direction: row;
+}
+.button ul li a:hover{
+	color:#FFFFFF;
+}
+
+.container{
+	margin-top: 2%;
+	padding-right:1px;
+	padding-left:1px;
+	margin-right:0;
+	margin-left:55%;
+}
+
+.button{
+	margin-top:-50px;
+}
+
+a.lien-footer {
+	text-decoration: none;
+	color: #ddd;
+	font-weight: bold;	
+	font-size: 1em;
+	margin-top: 3%;
+	line-height:2.8;
+	margin-top: 20px;
+}
+
+a.lien-footer:hover {
+	color:#FFFFFF;
+}
+footer p{
+	color: #ddd;
+	font-weight: bold;	
+	font-size: 1em;
+	
+}
+footer div{
+	margin-top: 10px;
+}
