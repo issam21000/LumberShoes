@@ -11,7 +11,7 @@ class Order extends Model
   public $timestamps=true;
 
   public function orderLine(){
-		return $this->belongsTo('\App\Models\OrderLine','id_orderLine');  
+		return $this->hasMany('\App\Models\OrderLine','id_orderLine');  
 	}
 
   public function user(){

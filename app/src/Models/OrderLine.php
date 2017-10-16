@@ -15,7 +15,7 @@ class OrderLine extends Model
 	}
 
   public function order(){
-		return $this->hasMany('\App\Models\Order','id_order');  
+		return $this->belongsTo('\App\Models\Order','id_order');  
 	}
 
 }

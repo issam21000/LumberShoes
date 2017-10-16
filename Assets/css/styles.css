@@ -142,3 +142,59 @@ footer p{
 footer div{
 	margin-top: 10px;
 }
+
+.shoesContainer{
+	width: 100%;
+	margin-top: 4%;
+}
+
+.shoesImage{   
+    width: 150px;
+    height: 200px;   
+    padding: 15px 0;
+   
+}
+
+.shoes{
+	display: inline-block;
+    box-shadow: 0px 0px 5px #000;
+    background-color: #f3f3f3;
+    text-align: center;
+    width: 25%;
+    margin-left: 3%;
+    margin-bottom: 2%;
+    margin-right: 4%; 
+}
+
+.shoes:hover{
+	transform: translate(0, 5px);
+}
+
+/*.shoesDescription{
+	height: 50px;
+   
+}*/
+
+.ajouterPanier > a{
+	background:linear-gradient(to bottom,#2bb04a 0%,#2bb04a 100%);
+	border-color:#2bb04a;
+	padding: 2%;
+	text-decoration: none;
+	color: #fff;
+	width: 100%;
+	border-radius: 4px;
+	font-weight: bold;
+	padding:3% 5% 3% 5%;
+}
+
+.margin-bottom{
+	margin-bottom: 1em;
+}
+.price, .shoes span{
+	
+	font-size: 1.3em;
+
+}
+.shoes span{
+	color:red;
+}

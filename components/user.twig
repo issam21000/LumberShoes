@@ -1,4 +1,6 @@
-{% include 'header.twig' %}
+{% extends 'templates/base_layout.twig' %}
+
+	{% block content %}
 
 		<h2 class="section-container">Mon compte</h2>
 
@@ -72,7 +74,7 @@
 		</strong>
 	</p>
 
-{% include 'footer.twig' %}
+{% endblock %}
 
 
 

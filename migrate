@@ -23,7 +23,7 @@ class Migrator {
                 $table->string('full_name');
                 $table->string('email');
                 $table->string('password');
-                $table->timestamp('created_date');
+                $table->timestamp('cr_d');
                 $table->string('last_latitude');
                 $table->string('last_longitude');
                 $table->timestamps();          
@@ -43,7 +43,6 @@ class Migrator {
             {
                 $table->increments('id_order');
                 $table->integer('id_user');
-                $table->integer('id_orderLine');
                 $table->integer('total_price')->default(0);
                 $table->timestamp('order_date');
                 $table->timestamps();
@@ -52,7 +51,6 @@ class Migrator {
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
                 $table->unique('id_user');
-                $table->unique('id_orderLine');
 
             });
         }
@@ -64,10 +62,10 @@ class Migrator {
             Capsule::schema()->create('OrderLine', function($table)
             {
                 $table->increments('id_orderLine');
-				$table->integer('id_shoes');
-                $table->integer('quantity');
-                $table->date('start_date');
-                $table->date('end_date');
+                $table->integer('id_shoes');
+				$table->integer('id_order');
+                $table->timestamp('start_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('end_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamps();
 
                 // We'll need to ensure that MySQL uses the InnoDB engine to
@@ -85,8 +83,8 @@ class Migrator {
             {
 				$table->increments('id_shoes');
                 $table->integer('id_brand');
-                $table->integer('id_user');
                 $table->integer('id_shop');
+                $table->string('image');
                 $table->integer('size');
                 $table->integer('price_per_day');
                 $table->boolean('is_reserved');
@@ -96,7 +94,6 @@ class Migrator {
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
                 $table->unique('id_brand');
-                $table->unique('id_user');
                 $table->unique('id_shop');
 
 

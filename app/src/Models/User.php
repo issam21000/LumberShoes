@@ -10,10 +10,6 @@ class User extends Model
   protected $primarykey ='id_user';
   public $timestamps=true;
 
-  public function shoes(){
-		return $this->hasMany('\App\Models\Shoes','id_shoes');  
-	}
-
 
   public function order(){
 		return $this->hasOne('\App\Models\Order','id_order');  

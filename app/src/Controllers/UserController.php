@@ -19,7 +19,7 @@ final class UserController
 
     public function index(Request $request, Response $response, $args)
     {
-        return $this->view->render($response, 'accueil.twig');
+        return $this->view->render($response, 'homepage.twig');
     }
 
     public function registerUser(Request $request, Response $response, $args)
