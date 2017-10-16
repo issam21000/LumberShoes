@@ -1,80 +1,84 @@
 {% extends 'templates/base_layout.twig' %}
 
+	{% block title %}
+		{{ parent() }} User
+	{% endblock %}
+
 	{% block content %}
 
-		<h2 class="section-container">Mon compte</h2>
+			<h2 class="section-container">Mon compte</h2>
 
-		<div class="cont">
-			<form class="form-horizontal" name="connectUser" method="post" action="/issam/ShoesRental/index.php/userRegister/connecter">
-				<div class="connexion">
-					<h4>Identifiez-vous pour poursuivre</h4>
+			<div class="cont">
+				<form class="form-horizontal" name="connectUser" method="post" action="/issam/ShoesRental/index.php/userRegister/connecter">
+					<div class="connexion">
+						<h4>Identifiez-vous pour poursuivre</h4>
 
-					<div class="col-md-offset-1 col-md-11">
-							<label for="mail">E-mail </label>
-							<span class="required">*</span><br>
-							<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>
-							
-					</div>
+						<div class="col-md-offset-1 col-md-11">
+								<label for="mail">E-mail </label>
+								<span class="required">*</span><br>
+								<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>
+								
+						</div>
 
-					<div class="col-md-offset-1 col-md-11">
-							<label for="password">Mot de passe </label>
-							<span class="required">*</span><br>
-							<input class= form-control id="password" type="password" name="password" placeholder="Saisissez votre mot de passe"/><br>
-							
+						<div class="col-md-offset-1 col-md-11">
+								<label for="password">Mot de passe </label>
+								<span class="required">*</span><br>
+								<input class= form-control id="password" type="password" name="password" placeholder="Saisissez votre mot de passe"/><br>
+								
+						</div>
+					  
+					  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-11">
+					      <div class="checkbox">
+					        <label>
+					          <input type="checkbox" name="remember"/> Remember me
+					        </label>
+					      </div>
+					    </div>
+					  </div>
+
+					  <div class="col-md-offset-1 col-md-11">
+							<button class="btn btn-primary" type="submit" value="connecter" name="bouttonConnecter">Valider</button>
+					  </div>
 					</div>
 				  
-				  <div class="form-group">
-				    <div class="col-sm-offset-2 col-sm-11">
-				      <div class="checkbox">
-				        <label>
-				          <input type="checkbox" name="remember"/> Remember me
-				        </label>
-				      </div>
-				    </div>
-				  </div>
-
-				  <div class="col-md-offset-1 col-md-11">
-						<button class="btn btn-primary" type="submit" value="connecter" name="bouttonConnecter">Valider</button>
-				  </div>
-				</div>
-			  
-	 
-			</form>
+		 
+				</form>
 
 
-			<form name="register"  method="post" action="/issam/ShoesRental/index.php/userRegister/enregistrer">
-				<div class="inscription">
-					<h4>Vous êtes nouveau client ShoesRental ?</h4>					
+				<form name="register"  method="post" action="/issam/ShoesRental/index.php/userRegister/enregistrer">
+					<div class="inscription">
+						<h4>Vous êtes nouveau client ShoesRental ?</h4>					
 
-					<div class="col-md-offset-5 col-md-6">
-						<label for="mail">E-mail </label>
-						<span class="required">*</span><br>
-						<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>						
-					</div>
+						<div class="col-md-offset-5 col-md-6">
+							<label for="mail">E-mail </label>
+							<span class="required">*</span><br>
+							<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>						
+						</div>
 
-					<div class="col-md-offset-5 col-md-6">
-						<label for="password">Mot de passe  </label><br>
-						<input class= form-control id="password" type="password" name="password" placeholder="Entrez votre mot de passe" /><br>						
-					</div>
+						<div class="col-md-offset-5 col-md-6">
+							<label for="password">Mot de passe  </label><br>
+							<input class= form-control id="password" type="password" name="password" placeholder="Entrez votre mot de passe" /><br>						
+						</div>
 
-					<div class="col-md-offset-5 col-md-6">
-						<label for="password">Confirmation du mot de passe</label><br>
-						<input class= form-control id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Veuillez confirmer votre mot de passe" /><br>						
-					</div>
+						<div class="col-md-offset-5 col-md-6">
+							<label for="password">Confirmation du mot de passe</label><br>
+							<input class= form-control id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Veuillez confirmer votre mot de passe" /><br>						
+						</div>
 
-					<div class="col-md-offset-5 col-md-4">
-							<button class="btn btn-primary" type="submit" value="envoyer" name="bouttonEnvoyer">Envoyer</button>
-					</div>
-				</div>					
-			</form>
-	</div>
-	<p class="paragraph">
-		<strong>
-			Le formulaire ci-dessus est destiné à vous permettre d’ouvrir votre compte client ShoesRental. Les champs marqués par un astérisque sont obligatoires. Dans le cas où ces champs ne seraient pas remplis, la création de votre compte client ShoesRental sera impossible.
-		</strong>
-	</p>
+						<div class="col-md-offset-5 col-md-4">
+								<button class="btn btn-primary" type="submit" value="envoyer" name="bouttonEnvoyer">Envoyer</button>
+						</div>
+					</div>					
+				</form>
+		</div>
+		<p class="paragraph">
+			<strong>
+				Le formulaire ci-dessus est destiné à vous permettre d’ouvrir votre compte client ShoesRental. Les champs marqués par un astérisque sont obligatoires. Dans le cas où ces champs ne seraient pas remplis, la création de votre compte client ShoesRental sera impossible.
+			</strong>
+		</p>
 
-{% endblock %}
+	{% endblock %}
 
 
 
