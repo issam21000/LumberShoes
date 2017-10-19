@@ -76,6 +76,23 @@ $container['activation'] = function ($c) {
 # Action factories Controllers
 # -----------------------------------------------------------------------------
 
+/*
+** The Base Controller allow access to all the app container services / dependencies
+*/
+
+$container['BaseController'] = function($c){
+  return new \App\Controllers\BaseController($c);
+};
+
+/*
+**Adding the Shop Controller to the container
+*/
+
+$container['ShopController'] = function($c){
+  return new \App\Controllers\ShopController($c);
+};
+
+
 $container['App\Controllers\HomeController'] = function ($c) {
     return new App\Controllers\HomeController(
 		$c->get('view'), 
