@@ -22,13 +22,20 @@ $container['view'] = function ($c) {
         $c['request']->getUri()
     ));
     $view->addExtension(new Twig_Extension_Debug());
+    $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental/index.php');
+    $view->getEnvironment()->addGlobal('session', $_SESSION);    
+    $view->getEnvironment()->addGlobal('flash', $c['flash']);    
+    $view->addExtension(new Knlv\Slim\Views\TwigMessages(
+    new Slim\Flash\Messages()
+));
+
 	
     return $view;
 };
 
 // Flash messages
 $container['flash'] = function ($c) {
-    return new \Slim\Flash\Messages;
+    return new Slim\Flash\Messages;
 };
 
 // monolog
@@ -86,6 +93,7 @@ $container['App\Controllers\HomeController'] = function ($c) {
 
 $container['App\Controllers\UserController'] = function ($c) {
     return new App\Controllers\UserController(
+    $c['flash'],
 		$c->get('view'), 
 		$c->get('logger'),
 		$c->get('App\Repositories\UserRepository')

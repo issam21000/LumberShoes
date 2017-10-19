@@ -1,42 +1,42 @@
 {% extends 'templates/base_layout.twig' %}
 
 	{% block title %}
-		{{ parent() }} contact
+		{{ parent() }} Contact
 	{% endblock %}
 
 	{% block content %}
 
 		<h2 class="section-container"> Contactez nous </h2>
-
-				<form name="contact"  method="post" action="/issam/ShoesRental/index.php/contact/envoyer">
+			<div class="formContact">
+				<form name="contact"  method="post" action="{{ baseUrl }}/contact/envoyer">
 
 						<div>			
-							<label for="name">Nom </label>
+							<label for="name">Name </label>
 							<span class="required">*</span><br>
 							<input class= form-control id="name" type="text" name="name" placeholder="Entrez votre nom"/><br>
 
 						</div>
 
 						<div>
-							<label for="prenom">Prénom  </label><br>
+							<label for="prenom">First name  </label><br>
 							<input class= form-control id="prenom" type="text" name="prenom" placeholder="Entrez votre prénom"/><br>
 							
 						</div>
 
 						<div>
-							<label for="mail">E-mail </label>
+							<label for="mail">Email adress </label>
 							<span class="required">*</span><br>
 							<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"><br>
 							
 						</div>
 
 						<div>
-							<label for="téléphone">Téléphone </label><br>
+							<label for="téléphone">Phone </label><br>
 							<input class= form-control id="téléphone" type="text" name="téléphone" placeholder="Entrez votre numéro de Téléphone"/><br>		
 						</div>
 
 						<div>
-							<label for="sujet">Sujet </label>
+							<label for="sujet">Subject </label>
 							<span class="required">*</span><br>
 							<input class= form-control id="sujet" type="text" name="subject" placeholder="Sujet"/><br>		
 						</div>
@@ -46,12 +46,13 @@
 
 
 							<div >
-								<button class="btn btn-success" type="submit" value="envoyer" name="bouttonEnvoyer">Envoyer</button>
+								<button class="btn btn-success" type="submit" value="envoyer" name="bouttonEnvoyer">Submit</button>
 							</div>
 
 						</div>
 						
 				</form>
+			</div>
 				<br>
 
 	{% endblock %}

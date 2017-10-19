@@ -6,22 +6,52 @@
 
 	{% block content %}
 
-			<h2 class="section-container">Mon compte</h2>
+			
+			{# <h2><pre>{{ _session.errorSignupUser }}</pre></h2> #}
+
+			<h2 class="section-container">Sign in/join</h2>
+
+			{% if session.errorSignupUser %}
+   				 <div class="alert alert-danger">
+	   				 <b>{{ flash.getMessage('Error')[0] }}</b>
+	   				{% for session in session.errorSignupUser %}	
+	        		 	<p>{{ session }}</p>
+	        		 {% endfor %}
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('Erreur')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('Erreur')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('PassError')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('PassError')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('RegisterSuccss')[0] %}
+   				 <div class="alert alert-success">
+        		<b>{{ flash.getMessage('RegisterSuccss')[0] }}</b>
+    			</div>
+			{% endif %}
 
 			<div class="cont">
-				<form class="form-horizontal" name="connectUser" method="post" action="/issam/ShoesRental/index.php/userRegister/connecter">
+				<form class="form-horizontal" name="connectUser" method="post" action="{{ baseUrl }}/userRegister/connecter">
 					<div class="connexion">
-						<h4>Identifiez-vous pour poursuivre</h4>
+						<h4>Already registered?</h4>
 
 						<div class="col-md-offset-1 col-md-11">
-								<label for="mail">E-mail </label>
+								<label for="mail">E-mail adress</label>
 								<span class="required">*</span><br>
 								<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>
 								
 						</div>
 
 						<div class="col-md-offset-1 col-md-11">
-								<label for="password">Mot de passe </label>
+								<label for="password">password </label>
 								<span class="required">*</span><br>
 								<input class= form-control id="password" type="password" name="password" placeholder="Saisissez votre mot de passe"/><br>
 								
@@ -38,7 +68,7 @@
 					  </div>
 
 					  <div class="col-md-offset-1 col-md-11">
-							<button class="btn btn-primary" type="submit" value="connecter" name="bouttonConnecter">Valider</button>
+							<button class="btn btn-primary" type="submit" value="connecter" name="bouttonConnecter">Sign in</button>
 					  </div>
 					</div>
 				  
@@ -48,33 +78,36 @@
 
 				<form name="register"  method="post" action="/issam/ShoesRental/index.php/userRegister/enregistrer">
 					<div class="inscription">
-						<h4>Vous êtes nouveau client ShoesRental ?</h4>					
+						<h4>New customers ShoesRental ?</h4>					
 
 						<div class="col-md-offset-5 col-md-6">
-							<label for="mail">E-mail </label>
+							<label for="mail">Email address</label>
 							<span class="required">*</span><br>
 							<input class= form-control id="mail" type="text" name="email" placeholder="Saisissez votre adresse mail"/><br>						
 						</div>
 
 						<div class="col-md-offset-5 col-md-6">
-							<label for="password">Mot de passe  </label><br>
+							<label for="password">Password</label>
+							<span class="required">*</span><br>
 							<input class= form-control id="password" type="password" name="password" placeholder="Entrez votre mot de passe" /><br>						
 						</div>
 
 						<div class="col-md-offset-5 col-md-6">
-							<label for="password">Confirmation du mot de passe</label><br>
+							<label for="password">Confirm password</label>
+							<span class="required">*</span><br>
 							<input class= form-control id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Veuillez confirmer votre mot de passe" /><br>						
 						</div>
 
 						<div class="col-md-offset-5 col-md-4">
-								<button class="btn btn-primary" type="submit" value="envoyer" name="bouttonEnvoyer">Envoyer</button>
+								<button class="btn btn-primary" type="submit" value="envoyer" name="bouttonEnvoyer">Register</button>
 						</div>
 					</div>					
 				</form>
 		</div>
 		<p class="paragraph">
 			<strong>
-				Le formulaire ci-dessus est destiné à vous permettre d’ouvrir votre compte client ShoesRental. Les champs marqués par un astérisque sont obligatoires. Dans le cas où ces champs ne seraient pas remplis, la création de votre compte client ShoesRental sera impossible.
+				
+				The above form is intended to allow you to open your ShoesRental customer account. Fields marked with an asterisk are mandatory. In the event that these fields are not filled in, the creation of your ShoesRental customer account will be impossible.
 			</strong>
 		</p>
 

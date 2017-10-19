@@ -20,12 +20,12 @@ class Migrator {
             Capsule::schema()->create('User', function($table)
             {
                 $table->increments('id_user');
-                $table->string('full_name');
+                $table->string('full_name')->nullable();
                 $table->string('email');
                 $table->string('password');
-                $table->timestamp('cr_d');
-                $table->string('last_latitude');
-                $table->string('last_longitude');
+                $table->timestamp('created_date')->nullable();
+                $table->string('last_latitude')->nullable();
+                $table->string('last_longitude')->nullable();
                 $table->timestamps();          
 
                 // We'll need to ensure that MySQL uses the InnoDB engine to

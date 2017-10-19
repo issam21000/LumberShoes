@@ -38,6 +38,7 @@ h4{
 .cont{
 	display:flex;
 	flex-direction: row;
+	margin-left: 1%;
 }
 
 .paragraph{
@@ -51,11 +52,11 @@ h4{
     line-height: 1em;
 }
 
-body{
+/*body{
 	margin:1%;
-}
+}*/
 
-.header {
+body header .header {
 	border:2px solid black;
 	width: 100%;
 	height: 100px;
@@ -197,4 +198,8 @@ footer div{
 }
 .shoes span{
 	color:red;
+}
+
+.formContact{
+	margin: 2%;
 }
