@@ -10,3 +10,6 @@ $app->get('/userRegister', 'App\Controllers\UserController:registerUser');
 $app->get('/contact', 'App\Controllers\UserController:formContact');
 
 $app->get('/users', 'App\Controllers\UserController:dispatch')->setName('userpage');
+
+//Stores search on the map page
+$app->get('/shops','ShopController:all')->setName('all_shops');

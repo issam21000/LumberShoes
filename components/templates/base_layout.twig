@@ -2,25 +2,33 @@
 <html lang="fr">
 
 	<head>
-		<link rel="stylesheet" type="text/css" href="/issam/ShoesRental/Assets/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/issam/ShoesRental/Assets/css/styles.css">
+
+		<link rel="stylesheet" type="text/css" href="Assets/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="Assets/css/styles.css">
+
+		<script type="text/javascript" src="Assets/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="Assets/js/bootstrap.min.js"></script>
 		<meta charset="UTF-8">
 		<title>
 			{% block title %}
 				ShoesRental -
 			{% endblock %}
-		</title>		
+		</title>
+
+		{% block custom_assets %}
+
+		{% endblock %}
 	</head>
 
 	<body>
 		<header>
 			<div class="header">
-				<a class="enregistrer" href="/issam/ShoesRental/index.php/userRegister">Mon compte</a>
+				<a class="enregistrer" href="userRegister">Mon compte</a>
 
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-4 ">
-							 <form action="/issam/ShoesRental/index.php/search" method="get" role="search">
+							 <form action="search" method="get" role="search">
 					            <div class="input-group custom-search-form">
 					              <input type="text" class="form-control" placeholder="Rechercher une marque, un magasin...">
 					              <span class="input-group-btn">
@@ -36,9 +44,9 @@
 			</div>	
 			<div class="button">
 				<ul>				
-					<li><a href="/issam/ShoesRental/index.php">Accueil</a></li>
-					<li><a href="/issam/ShoesRental/index.php/shop">Mon magasin</a></li>
-					<li><a href="/issam/ShoesRental/index.php/shoes">Chaussures</a></li>
+					<li><a href="">Accueil</a></li>
+					<li><a href="shops">No magasins</a></li>
+					<li><a href="shoes">Chaussures</a></li>
 				
 				</ul>
 			</div>
@@ -50,9 +58,9 @@
 
 		<footer>
 			<div>
-				<a class="lien-footer" href="/issam/ShoesRental/index.php">Accueil -</a>  
-				<a class="lien-footer" href="/issam/ShoesRental/index.php/shoes">Chaussures -</a> 
-				<a class="lien-footer" href="/issam/ShoesRental/index.php/contact">Nous contacter</a> 
+				<a class="lien-footer" href="">Accueil -</a>  
+				<a class="lien-footer" href="shoes">Chaussures -</a> 
+				<a class="lien-footer" href="contact">Nous contacter</a> 
 				<p>© 2017 ShoesRental</p>
 			</div>
 		</footer>
