@@ -19,7 +19,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('User')) {
             Capsule::schema()->create('User', function($table)
             {
-                $table->increments('id_user');
+                $table->integer('id_user', true);
                 $table->string('full_name');
                 $table->string('email');
                 $table->string('password');
@@ -31,6 +31,8 @@ class Migrator {
                 // We'll need to ensure that MySQL uses the InnoDB engine to
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
+
+                //Foreign keys
                 $table->unique('email');
             });
         }
@@ -41,7 +43,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('Order')) {
             Capsule::schema()->create('Order', function($table)
             {
-                $table->increments('id_order');
+                $table->integer('id_order', true);
                 $table->integer('id_user');
                 $table->integer('total_price')->default(0);
                 $table->timestamp('order_date');
@@ -50,38 +52,76 @@ class Migrator {
                 // We'll need to ensure that MySQL uses the InnoDB engine to
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
-                $table->unique('id_user');
+
+                //Foreign keys
+                $table->foreign('id_user')->references('id_user')->on('User');
 
             });
         }
-
-        /**
-         * create order_line table
+		
+		/**
+         * create brand table
          */
-        if (!Capsule::schema()->hasTable('OrderLine')) {
-            Capsule::schema()->create('OrderLine', function($table)
+        if (!Capsule::schema()->hasTable('Brand')) {
+            Capsule::schema()->create('Brand', function($table)
             {
-                $table->increments('id_orderLine');
-                $table->integer('id_shoes');
-				$table->integer('id_order');
-                $table->timestamp('start_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
-                $table->timestamp('end_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
+                $table->integer('id_brand', true);
+                $table->string('legend');
                 $table->timestamps();
 
                 // We'll need to ensure that MySQL uses the InnoDB engine to
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
-				$table->unique('id_shoes');
             });
         }
-		
-		/**
+
+        /**
+         * create city table
+         */
+        if (!Capsule::schema()->hasTable('City')) {
+            Capsule::schema()->create('City', function($table)
+            {
+                $table->integer('id_city', true);
+                $table->string('name');
+                $table->timestamps();
+
+                // We'll need to ensure that MySQL uses the InnoDB engine to
+                // support the indexes, other engines aren't affected.
+                $table->engine = 'InnoDB';
+            });
+        }
+        
+        /**
+         * create shop table
+         */
+        if (!Capsule::schema()->hasTable('Shop')) {
+            Capsule::schema()->create('Shop', function($table)
+            {
+                $table->integer('id_shop', true);
+                $table->integer('id_city');
+                $table->string('shop_name');
+                $table->string('formatted_address');
+                $table->string('latitude');
+                $table->string('longitude');
+                $table->timestamps();
+
+                // We'll need to ensure that MySQL uses the InnoDB engine to
+                // support the indexes, other engines aren't affected.
+                $table->engine = 'InnoDB';
+
+                //Foreign keys
+                $table->foreign('id_city')->references('id_city')->on('City');
+                
+            });
+        }
+        
+        /**
          * create shoes table
          */
         if (!Capsule::schema()->hasTable('Shoes')) {
             Capsule::schema()->create('Shoes', function($table)
             {
-				$table->increments('id_shoes');
+                $table->integer('id_shoes', true);
                 $table->integer('id_brand');
                 $table->integer('id_shop');
                 $table->string('image');
@@ -93,64 +133,35 @@ class Migrator {
                 // We'll need to ensure that MySQL uses the InnoDB engine to
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
-                $table->unique('id_brand');
-                $table->unique('id_shop');
+
+                //Foreign keys
+                $table->foreign('id_brand')->references('id_brand')->on('Brand');
+                $table->foreign('id_shop')->references('id_shop')->on('Shop');
 
 
-            });
-        }
-		
-		/**
-         * create brand table
-         */
-        if (!Capsule::schema()->hasTable('Brand')) {
-            Capsule::schema()->create('Brand', function($table)
-            {
-				$table->increments('id_brand');
-                $table->string('legend');
-                $table->timestamps();
-
-                // We'll need to ensure that MySQL uses the InnoDB engine to
-                // support the indexes, other engines aren't affected.
-                $table->engine = 'InnoDB';
-            });
-        }
-		
-		/**
-         * create shop table
-         */
-        if (!Capsule::schema()->hasTable('Shop')) {
-            Capsule::schema()->create('Shop', function($table)
-            {
-                $table->increments('id_shop');
-				$table->integer('id_city');
-                $table->string('shop_name');
-                $table->string('formated_adress');
-                $table->string('latitude');
-                $table->string('logitude');
-                $table->timestamps();
-
-                // We'll need to ensure that MySQL uses the InnoDB engine to
-                // support the indexes, other engines aren't affected.
-                $table->engine = 'InnoDB';
-                $table->unique('id_city');
-                
             });
         }
 
         /**
-         * create city table
+         * create order_line table
          */
-        if (!Capsule::schema()->hasTable('City')) {
-            Capsule::schema()->create('City', function($table)
+        if (!Capsule::schema()->hasTable('OrderLine')) {
+            Capsule::schema()->create('OrderLine', function($table)
             {
-                $table->increments('id_city');
-                $table->string('name');
+                $table->integer('id_orderLine', true);
+                $table->integer('id_shoes');
+                $table->integer('id_order');
+                $table->timestamp('start_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
+                $table->timestamp('end_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
                 $table->timestamps();
 
                 // We'll need to ensure that MySQL uses the InnoDB engine to
                 // support the indexes, other engines aren't affected.
                 $table->engine = 'InnoDB';
+
+                //Foreign keys
+                $table->foreign('id_shoes')->references('id_shoes')->on('Shoes');
+                $table->foreign('id_order')->references('id_order')->on('Order');
             });
         }
     }
