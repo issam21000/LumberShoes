@@ -15,25 +15,12 @@ $app->post('/userRegister/enregistrer', 'App\Controllers\UserController:userEnre
 $app->post('/userRegister/connecter', 'App\Controllers\UserController:userConnecter')
 ->setName('connecter');
 
-$app->get('/shop', 'App\Controllers\ShopController:---')->setName('shop');
 
 $app->get('/shoes', 'App\Controllers\ShoesController:---')->setName('shoes');
 
 $app->get('/search', 'App\Controllers\SearchController:---')->setName('search');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Stores search on the map page
+$app->get('/shops','ShopController:all')->setName('all_shops');
 

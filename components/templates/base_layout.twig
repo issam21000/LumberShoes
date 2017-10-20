@@ -2,25 +2,38 @@
 <html lang="fr">
 
 	<head>
+
 		<link rel="stylesheet" type="text/css" href="Assets/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="Assets/css/styles.css">
+
+		<script type="text/javascript" src="Assets/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="Assets/js/bootstrap.min.js"></script>
+
 		<meta charset="UTF-8">
 		<title>
 			{% block title %}
 				ShoesRental -
 			{% endblock %}
-		</title>		
+		</title>
+
+		{% block custom_assets %}
+
+		{% endblock %}
 	</head>
 
 	<body>
 		<header>
 			<div class="header">
+
 				<a class="enregistrer" href="{{ path_for('register') }}">Sign in</a>
+
 
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-4 ">
+
 							 <form action="{{ baseUrl }}/search" method="get" role="search">
+
 					            <div class="input-group custom-search-form">
 					              <input type="text" class="form-control" placeholder="Search for a brand, a shop...">
 					              <span class="input-group-btn">
@@ -36,9 +49,11 @@
 			</div>	
 			<div class="button">
 				<ul>				
+
 					<li><a href="{{ baseUrl }}">Home</a></li>
-					<li><a href="{{ baseUrl }}/shop">My shop</a></li>
+					<li><a href="{{ baseUrl }}/shops">My shop</a></li>
 					<li><a href="{{ baseUrl }}/shoes">Shoes</a></li>
+
 				
 				</ul>
 			</div>
@@ -50,9 +65,11 @@
 
 		<footer>
 			<div>
+
 				<a class="lien-footer" href="{{ baseUrl }}">Home -</a>  
 				<a class="lien-footer" href="{{ baseUrl }}/shoes">Shoes -</a> 
 				<a class="lien-footer" href="{{ baseUrl }}/contact">Contact us</a> 
+
 				<p>© 2017 ShoesRental</p>
 			</div>
 		</footer>
