@@ -75,4 +75,52 @@ final class UserController extends BaseController
 
         }
     }
+
+    public function userConnected(Request $request, Response $response, $args){
+
+        $postDonne=$request->getParsedBody();
+            if(isset ($postDonne) && $postDonne["bouttonConnecter"]=="connecter"){
+                $password=$postDonne ["password"];
+                $user=User::where("email",$postDonne["email"])->first();
+
+                if (null === $user){
+                    $this->container->flash->addMessage("ErrorEmail","Your email is incorrect");
+                    return $response->withRedirect("/userRegister");
+            }
+
+            $pass=$user->password;
+
+            if (password_verify($password, $pass)){
+                if(isset($postDonne["remember"])){
+                    $token= $this->randomString(20);
+                    setcookie("remember",$token,time()+60*60,"/");
+                    $user->token=$token; 
+                    $user->save();
+
+                }
+
+                $_SESSION['isConnected'] = $user;
+                            
+                
+                $this->container->flash->addMessage("Info","successful connection");
+                return $response->withRedirect("/");
+            }else{
+                $this->container->flash->addMessage("Erreur","Your password is incorrect");
+                return $response->withRedirect("/userRegister");
+            }
+            
+        }
+    }
+
+    public function userLogOut(Request $request, Response $response, $args){
+        unset($_SESSION['isConnected']);
+        setcookie("remember",null,-1,"/");
+        $this->container->flash->addMessage("InfoDeconnected","You have been logged out");
+        return $response->withRedirect("/");
+    }
+
+
+    function randomString($length) {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+    }
 }

@@ -4,7 +4,22 @@
 		{{ parent() }} Home
 	{% endblock %}
 
+	
+
 	{% block content %}
+
+		{% if flash.getMessage('InfoDeconnected')[0] %}
+	   		<div class="alert alert-danger">
+	        	<b>{{ flash.getMessage('InfoDeconnected')[0] }}</b>
+	    	</div>
+		{% endif %}
+
+		{% if flash.getMessage('Info')[0] %}
+	   		<div class="alert alert-success">
+	        	<b>{{ flash.getMessage('Info')[0] }}</b>
+	    	</div>
+		{% endif %}
+
 		<div class="shoesContainer">
 			{% for i in 0..5 %}
 				

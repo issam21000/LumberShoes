@@ -38,8 +38,14 @@
     			</div>
 			{% endif %}
 
+			{% if flash.getMessage('ErrorEmail')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('ErrorEmail')[0] }}</b>
+    			</div>
+			{% endif %}
+
 			<div class="cont">
-				<form class="form-horizontal" name="connectUser" method="post" action="{{ path_for('connecter') }}">
+				<form class="form-horizontal" name="connectUser" method="post" action="{{ path_for('connected') }}">
 					<div class="connexion">
 						<h4>Already registered?</h4>
 

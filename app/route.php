@@ -12,15 +12,16 @@ $app->get('/contact', 'App\Controllers\UserController:formContact')->setName('co
 $app->post('/userRegister/enregistrer', 'App\Controllers\UserController:userEnregistrer')
 ->setName('enregistrer');
 
-$app->post('/userRegister/connecter', 'App\Controllers\UserController:userConnecter')
-->setName('connecter');
+$app->post('/connecter', 'App\Controllers\UserController:userConnected')
+->setName('connected');
 
 
 $app->get('/shoes', 'App\Controllers\ShoesController:---')->setName('shoes');
 
 $app->get('/search', 'App\Controllers\SearchController:---')->setName('search');
 
-
 //Stores search on the map page
 $app->get('/shops','ShopController:all')->setName('all_shops');
+
+$app->get('/logOut','App\Controllers\UserController:userLogOut')->setName('logOut');
 
