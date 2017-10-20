@@ -101,20 +101,12 @@ $container['ShopController'] = function($c){
 
 
 $container['App\Controllers\HomeController'] = function ($c) {
-    return new App\Controllers\HomeController(
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\HomeRepository')
+    return new App\Controllers\HomeController($c
     );
 };
 
 $container['App\Controllers\UserController'] = function ($c) {
-    return new App\Controllers\UserController(
-    $c['flash'],
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\UserRepository')
-    );
+    return new App\Controllers\UserController($c);
 };
 # -----------------------------------------------------------------------------
 # Factories Models
