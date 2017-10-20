@@ -8,32 +8,23 @@ use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\User;
 use Slim\Flash\Messages;
 
-final class UserController
+final class UserController extends BaseController
 {
-    private $flash;
-    private $view;
-    private $logger;
-
-    public function __construct($flash ,$view, LoggerInterface $logger, $user)
-    {
-        $this->flash = $flash;
-        $this->view = $view;
-        $this->logger = $logger;
-    }
+    
 
     public function index(Request $request, Response $response, $args)
     {
-        return $this->view->render($response, 'homepage.twig');
+        return $this->container->view->render($response, 'homepage.twig');
     }
 
     public function registerUser(Request $request, Response $response, $args)
     {
-        return $this->view->render($response, 'user.twig');
+        return $this->container->view->render($response, 'user.twig');
     }
 
     public function formContact(Request $request, Response $response, $args)
     {
-        return $this->view->render($response, 'formContact.twig');
+        return $this->container->view->render($response, 'formContact.twig');
     }
 
     public function userEnregistrer(Request $request, Response $response, $args)
@@ -59,7 +50,7 @@ final class UserController
 
         if(isset ($postDonne) && $postDonne['bouttonEnvoyer']=="envoyer"){
             if(!empty($_SESSION['errorSignupUser'])){
-                $this->flash->addMessage("Error", "Erreur :");
+                $this->container->flash->addMessage("Error", "Erreur :");
                 return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
             }
 
@@ -67,19 +58,19 @@ final class UserController
             $existingUser=User::where("email",$postDonne["email"])->first();
 
             if(null !== $existingUser){
-                $this->flash->addMessage("Erreur", "This user already exists");
+                $this->container->flash->addMessage("Erreur", "This user already exists");
                 return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
             }
 
             if($postDonne["password"]!== $postDonne["passwordConfirm"]){
-                $this->flash->addMessage("PassError","Your confirmation password does not match the password you entered");
+                $this->container->flash->addMessage("PassError","Your confirmation password does not match the password you entered");
                 return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
             }
             
             $user->email=$postDonne["email"];
             $user->password=password_hash($postDonne["password"],PASSWORD_BCRYPT);
             $user->save();
-            $this->flash->addMessage("RegisterSuccss","Your registration has been successful, you can sign in");
+            $this->container->flash->addMessage("RegisterSuccss","Your registration has been successful, you can sign in");
             return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
 
         }

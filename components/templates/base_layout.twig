@@ -2,8 +2,8 @@
 <html lang="fr">
 
 	<head>
-		<link rel="stylesheet" type="text/css" href="/issam/ShoesRental/Assets/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/issam/ShoesRental/Assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="Assets/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="Assets/css/styles.css">
 		<meta charset="UTF-8">
 		<title>
 			{% block title %}
@@ -15,7 +15,7 @@
 	<body>
 		<header>
 			<div class="header">
-				<a class="enregistrer" href="{{ baseUrl }}/userRegister">Sign in</a>
+				<a class="enregistrer" href="{{ path_for('register') }}">Sign in</a>
 
 				<div class="container">
 					<div class="row">
