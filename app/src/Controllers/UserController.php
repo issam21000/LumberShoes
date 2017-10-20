@@ -51,7 +51,7 @@ final class UserController extends BaseController
         if(isset ($postDonne) && $postDonne['bouttonEnvoyer']=="envoyer"){
             if(!empty($_SESSION['errorSignupUser'])){
                 $this->container->flash->addMessage("Error", "Erreur :");
-                return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
+                return $response->withRedirect("/userRegister");
             }
 
             
@@ -59,19 +59,19 @@ final class UserController extends BaseController
 
             if(null !== $existingUser){
                 $this->container->flash->addMessage("Erreur", "This user already exists");
-                return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
+                return $response->withRedirect("/userRegister");
             }
 
             if($postDonne["password"]!== $postDonne["passwordConfirm"]){
                 $this->container->flash->addMessage("PassError","Your confirmation password does not match the password you entered");
-                return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
+                return $response->withRedirect("/userRegister");
             }
             
             $user->email=$postDonne["email"];
             $user->password=password_hash($postDonne["password"],PASSWORD_BCRYPT);
             $user->save();
             $this->container->flash->addMessage("RegisterSuccss","Your registration has been successful, you can sign in");
-            return $response->withRedirect("/issam/ShoesRental/index.php/userRegister");
+            return $response->withRedirect("/userRegister");
 
         }
     }

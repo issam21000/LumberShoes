@@ -22,7 +22,7 @@ $container['view'] = function ($c) {
         $c['request']->getUri()
     ));
     $view->addExtension(new Twig_Extension_Debug());
-    $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental');
+    // $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental');
     $view->getEnvironment()->addGlobal('session', $_SESSION);    
     $view->getEnvironment()->addGlobal('flash', $c['flash']);    
     $view->addExtension(new Knlv\Slim\Views\TwigMessages(

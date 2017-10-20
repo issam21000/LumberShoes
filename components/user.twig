@@ -39,7 +39,7 @@
 			{% endif %}
 
 			<div class="cont">
-				<form class="form-horizontal" name="connectUser" method="post" action="{{ baseUrl }}/userRegister/connecter">
+				<form class="form-horizontal" name="connectUser" method="post" action="{{ path_for('connecter') }}">
 					<div class="connexion">
 						<h4>Already registered?</h4>
 
@@ -76,7 +76,7 @@
 				</form>
 
 
-				<form name="register"  method="post" action="/issam/ShoesRental/index.php/userRegister/enregistrer">
+				<form name="register"  method="post" action="{{ path_for('enregistrer') }}">
 					<div class="inscription">
 						<h4>New customers ShoesRental ?</h4>					
 

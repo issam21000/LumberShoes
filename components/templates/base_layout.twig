@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="col-lg-4 ">
 
-							 <form action="{{ baseUrl }}/search" method="get" role="search">
+							 <form action="{{ path_for('search') }}" method="get" role="search">
 
 					            <div class="input-group custom-search-form">
 					              <input type="text" class="form-control" placeholder="Search for a brand, a shop...">
@@ -50,9 +50,9 @@
 			<div class="button">
 				<ul>				
 
-					<li><a href="{{ baseUrl }}">Home</a></li>
-					<li><a href="{{ baseUrl }}/shops">My shop</a></li>
-					<li><a href="{{ baseUrl }}/shoes">Shoes</a></li>
+					<li><a href="{{ path_for('index') }}">Home</a></li>
+					<li><a href="{{ path_for('all_shops') }}">My shop</a></li>
+					<li><a href="{{ path_for('shoes') }}">Shoes</a></li>
 
 				
 				</ul>
@@ -66,9 +66,9 @@
 		<footer>
 			<div>
 
-				<a class="lien-footer" href="{{ baseUrl }}">Home -</a>  
-				<a class="lien-footer" href="{{ baseUrl }}/shoes">Shoes -</a> 
-				<a class="lien-footer" href="{{ baseUrl }}/contact">Contact us</a> 
+				<a class="lien-footer" href="{{ path_for('index') }}">Home -</a>  
+				<a class="lien-footer" href="{{ path_for('shoes') }}">Shoes -</a> 
+				<a class="lien-footer" href="{{ path_for('contact') }}">Contact us</a> 
 
 				<p>© 2017 ShoesRental</p>
 			</div>

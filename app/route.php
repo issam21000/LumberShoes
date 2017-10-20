@@ -9,8 +9,8 @@ $app->get('/userRegister', 'App\Controllers\UserController:registerUser')->setNa
 
 $app->get('/contact', 'App\Controllers\UserController:formContact')->setName('contact');
 
-$app->post('/userRegister/enregistrer', 'App\Controllers\UserController:userEnregistrer')->setName('
-	enregistrer');
+$app->post('/userRegister/enregistrer', 'App\Controllers\UserController:userEnregistrer')
+->setName('enregistrer');
 
 $app->post('/userRegister/connecter', 'App\Controllers\UserController:userConnecter')
 ->setName('connecter');
