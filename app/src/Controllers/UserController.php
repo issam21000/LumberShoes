@@ -33,6 +33,10 @@ final class UserController extends BaseController
         $user=new User();
 
         $error=[];
+        if(!array_key_exists('name',$_POST)|| $_POST['name']=='' ||  !preg_match("/[a-zA-Z]+$/", $_POST['name'])){
+            $error['name']="You didn't enter your full name or full name incorrect ";
+        }
+
         if(!array_key_exists('email',$_POST)|| $_POST['email']=='' || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             $error['email']="You didn't enter a valid email address";
         }
@@ -67,6 +71,7 @@ final class UserController extends BaseController
                 return $response->withRedirect("/userRegister");
             }
             
+            $user->full_name=$postDonne["name"];
             $user->email=$postDonne["email"];
             $user->password=password_hash($postDonne["password"],PASSWORD_BCRYPT);
             $user->save();
@@ -79,6 +84,7 @@ final class UserController extends BaseController
     public function userConnected(Request $request, Response $response, $args){
 
         $postDonne=$request->getParsedBody();
+        $user=User::all();
             if(isset ($postDonne) && $postDonne["bouttonConnecter"]=="connecter"){
                 $password=$postDonne ["password"];
                 $user=User::where("email",$postDonne["email"])->first();

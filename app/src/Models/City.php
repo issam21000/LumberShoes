@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model
 {
   protected $table = "City";
-  protected $primarykey ='id_city';
+  protected $primarykey ='id';
   public $timestamps=true;
 
   public function shop(){
