@@ -25,3 +25,5 @@ $app->get('/shops','ShopController:all')->setName('all_shops');
 
 $app->get('/logOut','App\Controllers\UserController:userLogOut')->setName('logOut');
 
+$app->post('/postContact', 'App\Controllers\UserController:postContact')->setName('postContact');
+
