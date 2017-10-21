@@ -29,6 +29,9 @@
 
 				{% else %}
    				 	<a class="enregistrer" href="{{ path_for('logOut') }}">Sign out</a>
+   				 	<div class="welcome">
+   				 		<span>Welcome</span> {{ session.isConnected.full_name }}
+   				 	</div>
 				{% endif %}				
 
 

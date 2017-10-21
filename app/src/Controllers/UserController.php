@@ -84,7 +84,6 @@ final class UserController extends BaseController
     public function userConnected(Request $request, Response $response, $args){
 
         $postDonne=$request->getParsedBody();
-        $user=User::all();
             if(isset ($postDonne) && $postDonne["bouttonConnecter"]=="connecter"){
                 $password=$postDonne ["password"];
                 $user=User::where("email",$postDonne["email"])->first();

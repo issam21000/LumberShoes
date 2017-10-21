@@ -203,3 +203,14 @@ footer div{
 .formContact{
 	margin: 2%;
 }
+
+.welcome{
+	color:yellow;
+	float:right;
+	margin-right: -100px;
+	margin-top: 60px;
+	font-size: 0.9em;
+}
+.welcome span{
+	color:white;
+}
