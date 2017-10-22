@@ -99,6 +99,10 @@ $container['ShopController'] = function($c){
   return new \App\Controllers\ShopController($c);
 };
 
+$container['ShoesController'] = function($c){
+  return new \App\Controllers\ShoesController($c);
+};
+
 
 $container['App\Controllers\HomeController'] = function ($c) {
     return new App\Controllers\HomeController($c

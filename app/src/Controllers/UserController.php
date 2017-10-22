@@ -6,6 +6,8 @@ use Psr\Log\LoggerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\User;
+use App\Models\Shoes;
+use App\Models\Brand;
 use Slim\Flash\Messages;
 
 final class UserController extends BaseController
@@ -14,7 +16,8 @@ final class UserController extends BaseController
 
     public function index(Request $request, Response $response, $args)
     {
-        return $this->container->view->render($response, 'homepage.twig');
+        $shoes=Shoes::all();
+        return $this->container->view->render($response, 'homepage.twig',['shoes' => $shoes]);
     }
 
     public function registerUser(Request $request, Response $response, $args)
@@ -54,7 +57,7 @@ final class UserController extends BaseController
 
         if(isset ($postDonne) && $postDonne['buttonSubmit']=="submit"){
             if(!empty($_SESSION['errorSignupUser'])){
-                $this->container->flash->addMessage("Error", "registration error :");
+                $this->container->flash->addMessage("Error", "Registration error :");
                 return $response->withRedirect("/userRegister");
             }
 

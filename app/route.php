@@ -16,7 +16,7 @@ $app->post('/connecter', 'App\Controllers\UserController:userConnected')
 ->setName('connected');
 
 
-$app->get('/shoes', 'App\Controllers\ShoesController:---')->setName('shoes');
+$app->get('/allshoes', 'App\Controllers\ShoesController:displayShoes')->setName('shoes');
 
 $app->get('/search', 'App\Controllers\SearchController:---')->setName('search');
 
@@ -26,4 +26,6 @@ $app->get('/shops','ShopController:all')->setName('all_shops');
 $app->get('/logOut','App\Controllers\UserController:userLogOut')->setName('logOut');
 
 $app->post('/postContact', 'App\Controllers\UserController:postContact')->setName('postContact');
+
+$app->get('/{id}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
 
