@@ -17,21 +17,13 @@ final class ShoesController extends BaseController
     public function displayShoes(Request $request, Response $response, $args)
     {
         $shoes=Shoes::all();
-        $brand=Brand::where('legend',$args['legend'])->first();
-        return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes],['brand' => $brand]);
+        return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes]);
     }
 
     public function detailsShoes(Request $request, Response $response, $args)
     {
-        $shoes=Shoes::where('id', $args['id'])->first();
-        $brand=Brand::where('legend',$args['legend'])->first();
-
-        if($shoes->is_reserved==0){
-        	$shoes->is_reserved="Available !";
-        }else{
-        	$shoes->is_reserved="Not available !";
-        }
-        return $this->container->view->render($response, 'detailsShoes.twig',['shoes' => $shoes],['brand' => $brand]);
+        $shoes=Shoes::find($args['id']);
+        return $this->container->view->render($response, 'detailsShoes.twig',['shoes' => $shoes]);
     }
 
 

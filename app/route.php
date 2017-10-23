@@ -27,5 +27,6 @@ $app->get('/logOut','App\Controllers\UserController:userLogOut')->setName('logOu
 
 $app->post('/postContact', 'App\Controllers\UserController:postContact')->setName('postContact');
 
-$app->get('/{id}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
+$app->get('/allshoes/details/{id}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
+
 

@@ -13,16 +13,16 @@
 		<div class="shoesDetailsContainer">	
 
 			<div class="shoesDetails" data-pid=""> 				
-				<img class="detailsShoesImage" src="Assets/images/shoes/{{ shoes.image }}"><br>							
+				<img class="detailsShoesImage" src="/Assets/images/shoes/{{ shoes.image }}"><br>							
 			</div>
 			<div class="descriptionShoes">
 				 <h3><strong>{{ shoes.brand.legend }}</strong></h3> 
 				 <p>{{ shoes.description }}</p>
 				 <hr id="hr">
-				 {% if shoes.is_reserved =='Available !' %}
-				 	<h3 class="available">{{ shoes.is_reserved }}</h3>
+				 {% if shoes.is_reserved == 0 %}
+				 	<h3 class="available">Available !</h3>
 				{% else %} 	
-				 	<h3 class="notAvailable">{{ shoes.is_reserved }}</h3>
+				 	<h3 class="notAvailable">Not available !</h3>
 				{% endif %}
 				 <div> <h5><strong>Size : {{ shoes.size }}</strong></h5> </div>
 				 <p>rent and ship by <span class="ShoesRental">ShoesRental</span>
