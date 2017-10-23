@@ -18,21 +18,25 @@ final class ShoesController extends BaseController
     public function displayShoes(Request $request, Response $response, $args)
     {
         $shoes=Shoes::all();
-        $brand=Brand::where('legend',$args['legend'])->first();
-        return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes],['brand' => $brand]);
+        return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes]);
     }
 
     public function detailsShoes(Request $request, Response $response, $args)
     {
-        $shoes=Shoes::where('id', $args['id'])->first();
-        $brand=Brand::where('legend',$args['legend'])->first();
+        $shoes=Shoes::find($args['id']);
+        return $this->container->view->render($response, 'detailsShoes.twig',['shoes' => $shoes]);
+    }
 
-        if($shoes->is_reserved==0){
-        	$shoes->is_reserved="Available !";
+
+    public function bag(Request $request, Response $response, $args)
+    {
+
+        if(isset($_SESSION['isConnected'])){
+        	return $response->withRedirect("/shoes/bag");	
         }else{
-        	$shoes->is_reserved="Not available !";
+        	$this->container->flash->addMessage('ErrorLoginBag','You must be login to acces to bag');
+       		return $response->withRedirect("/userRegister");
         }
-        return $this->container->view->render($response, 'detailsShoes.twig',['shoes' => $shoes],['brand' => $brand]);
     }
 
 

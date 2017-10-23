@@ -16,7 +16,7 @@ $app->post('/connecter', 'App\Controllers\UserController:userConnected')
 ->setName('connected');
 
 
-$app->get('/allshoes', 'App\Controllers\ShoesController:displayShoes')->setName('shoes');
+$app->get('/shoes', 'App\Controllers\ShoesController:displayShoes')->setName('shoes');
 
 $app->get('/search', 'App\Controllers\SearchController:---')->setName('search');
 
@@ -27,7 +27,10 @@ $app->get('/logOut','App\Controllers\UserController:userLogOut')->setName('logOu
 
 $app->post('/postContact', 'App\Controllers\UserController:postContact')->setName('postContact');
 
-$app->get('/{id}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
+$app->get('/shoes/{id:[0-9]+}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
+
+$app->get('/shoes/bag', 'App\Controllers\ShoesController:bag')->setName('bag');
+
 
 //Get shoes list based on a given shop
 $app->get('/shops/{shop_id}', 'ShoesController:getShoesByShop')->setName('shoes_by_shop');

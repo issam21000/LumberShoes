@@ -44,6 +44,12 @@
     			</div>
 			{% endif %}
 
+			{% if flash.getMessage('ErrorLoginBag')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('ErrorLoginBag')[0] }}</b>
+    			</div>
+			{% endif %}
+
 			<div class="cont">
 				<form class="form-horizontal" name="connectUser" method="post" action="{{ path_for('connected') }}">
 					<div class="connexion">

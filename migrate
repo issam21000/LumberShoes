@@ -129,7 +129,7 @@ class Migrator {
                 $table->string('image');
                 $table->integer('size');
                 $table->integer('price_per_day');
-                $table->text('description')
+                $table->text('description');
                 $table->boolean('is_reserved');
                 $table->timestamps();
 
