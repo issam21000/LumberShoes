@@ -27,4 +27,18 @@ final class ShoesController extends BaseController
     }
 
 
+    public function bag(Request $request, Response $response, $args)
+    {
+
+        if(isset($_SESSION['isConnected'])){
+        	return $response->withRedirect("/shoes/bag");	
+        }else{
+        	$this->container->flash->addMessage('ErrorLoginBag','You must be login to acces to bag');
+       		return $response->withRedirect("/userRegister");
+        }
+    }
+
+
+
+
 }
