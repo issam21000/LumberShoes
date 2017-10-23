@@ -24,7 +24,7 @@
 			{% for row in shoes %}
 				
 				<div class="shoes"> 				
-					<img class="shoesImage" src="Assets/images/shoes/{{ row.image }}"><br>
+					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>
 					<a href="/{{ row.id }}" title="More details"><strong>{{ row.brand.legend }}</strong></a>
 					<div class="shoesDescription"> </div><br>
 					<div> <h5><strong>Size : {{ row.size }}</strong></h5> </div>
@@ -34,7 +34,8 @@
 						<a href="">Add to bag</a>
 					</div>
 				</div>
-			
+			{% else %}
+				<h2>Aucune chaussure dans ce magasin</h2>
 			{% endfor %}
 		</div>
 

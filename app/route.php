@@ -29,3 +29,6 @@ $app->post('/postContact', 'App\Controllers\UserController:postContact')->setNam
 
 $app->get('/{id}', 'App\Controllers\ShoesController:detailsShoes')->setName('details');
 
+//Get shoes list based on a given shop
+$app->get('/shops/{shop_id}', 'ShoesController:getShoesByShop')->setName('shoes_by_shop');
+

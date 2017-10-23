@@ -8,6 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use App\Models\User;
 use App\Models\Shoes;
 use App\Models\Brand;
+use App\Models\Shop;
 use Slim\Flash\Messages;
 
 final class ShoesController extends BaseController
@@ -32,6 +33,19 @@ final class ShoesController extends BaseController
         	$shoes->is_reserved="Not available !";
         }
         return $this->container->view->render($response, 'detailsShoes.twig',['shoes' => $shoes],['brand' => $brand]);
+    }
+
+
+    //Get the shoes list bases on a given shop
+
+    public function getShoesByShop(Request $request, Response $response, $args){
+        $shop = Shop::find($args['shop_id']);
+        if(null != $shop){
+            $shoes = $shop->shoes;
+            if(!empty($shoes)){
+                return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes]);
+            }
+        }
     }
 
 

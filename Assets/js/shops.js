@@ -24,7 +24,7 @@ function initMap() {
       });
 
       shopMarker.infoWindowHtmlContent = `<h4>`+shop.shop_name+`</h4>
-                                          <button class="btn btn-primary shop-explore" data-shop-id="`+shop.id_shop+`">Explorer
+                                          <button class="btn btn-primary shop-explore" data-shop-id="`+shop.id+`">Explorer
                                           </button>`;
       google.maps.event.addListener(shopMarker,'click',function(e){
         var infowindow = new google.maps.InfoWindow;
@@ -46,7 +46,7 @@ $(document).ready(function(){
   $('body').on('click', '.shop-explore', function(e){
     e.preventDefault();
     if(NaN != parseInt($(this).data('shop-id'))){
-      window.location.href = "./shoes/"+$(this).data('shop-id');
+      window.location.href = "./shops/"+$(this).data('shop-id');
     }
   });
 
