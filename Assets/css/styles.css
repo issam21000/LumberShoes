@@ -267,9 +267,13 @@ footer div{
 }
 
 .descriptionShoes{
-	width: 40%;
+	width: 40%;	
+}
+
+.descriptionShoes h3+p{
 	text-align: justify;
 }
+
 
 span.ShoesRental{
 	color:#096ec8;
