@@ -23,11 +23,9 @@
 		<div class="shoesContainer">
 			{% for row in shoes %}
 				
-				<div class="shoes" data-pid=""> 
-							
-					</p>
-					<img class="shoesImage" src="Assets/images/shoes/{{ row.image }}"><br>			
-					<div> <h5><strong>{{ row.brand.legend }}</strong></h5> </div>					
+				<div class="shoes"> 				
+					<img class="shoesImage" src="Assets/images/shoes/{{ row.image }}"><br>
+					<a href="/{{ row.id }}" title="More details"><strong>{{ row.brand.legend }}</strong></a>
 					<div class="shoesDescription"> </div><br>
 					<div> <h5><strong>Size : {{ row.size }}</strong></h5> </div>
 					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€00</sup><span></strong> </div><br>

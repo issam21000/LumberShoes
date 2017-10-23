@@ -1,0 +1,42 @@
+{% extends 'templates/base_layout.twig' %}
+
+	{% block title %}
+		{{ parent() }} Details
+	{% endblock %}
+
+	
+
+	{% block content %}
+
+		<h2 class="section-container">Shoes details</h2>	
+
+		<div class="shoesDetailsContainer">	
+
+			<div class="shoesDetails" data-pid=""> 				
+				<img class="detailsShoesImage" src="Assets/images/shoes/{{ shoes.image }}"><br>							
+			</div>
+			<div class="descriptionShoes">
+				 <h3><strong>{{ shoes.brand.legend }}</strong></h3> 
+				 <p>{{ shoes.description }}</p>
+				 <hr id="hr">
+				 {% if shoes.is_reserved =='Available !' %}
+				 	<h3 class="available">{{ shoes.is_reserved }}</h3>
+				{% else %} 	
+				 	<h3 class="notAvailable">{{ shoes.is_reserved }}</h3>
+				{% endif %}
+				 <div> <h5><strong>Size : {{ shoes.size }}</strong></h5> </div>
+				 <p>rent and ship by <span class="ShoesRental">ShoesRental</span>
+				 <p><b>The delivery :</b><br>Free delivery<br>Usually delivered in 1 to 3 days<br>Or immediate withdrawal in shop</p>
+			</div>
+			
+			<div class="priceAddBag">
+				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
+				<div class="addBagDetails">
+					<a href="/{{ shoes.id }}">Add to bag</a>
+				</div>
+			</div>
+			
+		</div>
+
+	{% endblock %}
+	

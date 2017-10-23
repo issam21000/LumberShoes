@@ -19,18 +19,15 @@ class Migrator {
         if (!Capsule::schema()->hasTable('User')) {
             Capsule::schema()->create('User', function($table)
             {
-<<<<<<< HEAD
-                $table->increments('id_user');
+
+                $table->integer('id', true);
                 $table->string('full_name')->nullable();
-=======
-                $table->integer('id_user', true);
-                $table->string('full_name');
->>>>>>> 1f4a4bde18351dc7b41e1a371d88e73b2363289c
                 $table->string('email');
                 $table->string('password');
                 $table->timestamp('created_date')->nullable();
                 $table->string('last_latitude')->nullable();
                 $table->string('last_longitude')->nullable();
+                $table->string('token')->nullable();
                 $table->timestamps();          
 
                 // We'll need to ensure that MySQL uses the InnoDB engine to
@@ -48,7 +45,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('Order')) {
             Capsule::schema()->create('Order', function($table)
             {
-                $table->integer('id_order', true);
+                $table->integer('id', true);
                 $table->integer('id_user');
                 $table->integer('total_price')->default(0);
                 $table->timestamp('order_date');
@@ -59,7 +56,7 @@ class Migrator {
                 $table->engine = 'InnoDB';
 
                 //Foreign keys
-                $table->foreign('id_user')->references('id_user')->on('User');
+                $table->foreign('id_user')->references('id')->on('User');
 
             });
         }
@@ -70,7 +67,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('Brand')) {
             Capsule::schema()->create('Brand', function($table)
             {
-                $table->integer('id_brand', true);
+                $table->integer('id', true);
                 $table->string('legend');
                 $table->timestamps();
 
@@ -86,7 +83,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('City')) {
             Capsule::schema()->create('City', function($table)
             {
-                $table->integer('id_city', true);
+                $table->integer('id', true);
                 $table->string('name');
                 $table->timestamps();
 
@@ -102,7 +99,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('Shop')) {
             Capsule::schema()->create('Shop', function($table)
             {
-                $table->integer('id_shop', true);
+                $table->integer('id', true);
                 $table->integer('id_city');
                 $table->string('shop_name');
                 $table->string('formatted_address');
@@ -115,7 +112,7 @@ class Migrator {
                 $table->engine = 'InnoDB';
 
                 //Foreign keys
-                $table->foreign('id_city')->references('id_city')->on('City');
+                $table->foreign('id_city')->references('id')->on('City');
                 
             });
         }
@@ -126,12 +123,13 @@ class Migrator {
         if (!Capsule::schema()->hasTable('Shoes')) {
             Capsule::schema()->create('Shoes', function($table)
             {
-                $table->integer('id_shoes', true);
+                $table->integer('id', true);
                 $table->integer('id_brand');
                 $table->integer('id_shop');
                 $table->string('image');
                 $table->integer('size');
                 $table->integer('price_per_day');
+                $table->text('description')
                 $table->boolean('is_reserved');
                 $table->timestamps();
 
@@ -140,8 +138,8 @@ class Migrator {
                 $table->engine = 'InnoDB';
 
                 //Foreign keys
-                $table->foreign('id_brand')->references('id_brand')->on('Brand');
-                $table->foreign('id_shop')->references('id_shop')->on('Shop');
+                $table->foreign('id_brand')->references('id')->on('Brand');
+                $table->foreign('id_shop')->references('id')->on('Shop');
 
 
             });
@@ -153,7 +151,7 @@ class Migrator {
         if (!Capsule::schema()->hasTable('OrderLine')) {
             Capsule::schema()->create('OrderLine', function($table)
             {
-                $table->integer('id_orderLine', true);
+                $table->integer('id', true);
                 $table->integer('id_shoes');
                 $table->integer('id_order');
                 $table->timestamp('start_date')->default(Capsule::raw('CURRENT_TIMESTAMP'));
@@ -165,8 +163,8 @@ class Migrator {
                 $table->engine = 'InnoDB';
 
                 //Foreign keys
-                $table->foreign('id_shoes')->references('id_shoes')->on('Shoes');
-                $table->foreign('id_order')->references('id_order')->on('Order');
+                $table->foreign('id_shoes')->references('id')->on('Shoes');
+                $table->foreign('id_order')->references('id')->on('Order');
             });
         }
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderLine extends Model
 {
   protected $table = "OrderLine";
-  protected $primarykey ='id_orderLine';
+  protected $primarykey ='id';
   public $timestamps=true;
 
   public function shoes(){

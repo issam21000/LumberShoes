@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
   protected $table = "Order";
-  protected $primarykey ='id_order';
+  protected $primarykey ='id';
   public $timestamps=true;
 
   public function orderLine(){
