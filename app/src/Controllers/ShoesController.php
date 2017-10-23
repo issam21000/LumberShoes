@@ -29,7 +29,6 @@ final class ShoesController extends BaseController
 
     public function bag(Request $request, Response $response, $args)
     {
-
         if(isset($_SESSION['isConnected'])){
         	return $response->withRedirect("/shoes/bag");	
         }else{
@@ -37,8 +36,4 @@ final class ShoesController extends BaseController
        		return $response->withRedirect("/userRegister");
         }
     }
-
-
-
-
 }
