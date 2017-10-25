@@ -24,12 +24,7 @@ $container['view'] = function ($c) {
     $view->addExtension(new Twig_Extension_Debug());
     // $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental');
     $view->getEnvironment()->addGlobal('session', $_SESSION);    
-    $view->getEnvironment()->addGlobal('flash', $c['flash']);    
-    $view->addExtension(new Knlv\Slim\Views\TwigMessages(
-    new Slim\Flash\Messages()
-));
-
-	
+    $view->getEnvironment()->addGlobal('flash', $c['flash']);
     return $view;
 };
 

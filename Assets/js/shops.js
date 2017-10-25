@@ -17,14 +17,37 @@ function initMap() {
     var bounds = new google.maps.LatLngBounds();
 
     for(shop of shops){
-      console.log(shop);
-      console.log({lat: parseFloat(shop.latitude),lng: parseFloat(shop.longitude)});
-      markers.push(new google.maps.Marker({
+
+      var shopMarker = new google.maps.Marker({
         position: {lat: parseFloat(shop.latitude),lng: parseFloat(shop.longitude)},
         map: map
-      }));
+      });
+
+      shopMarker.infoWindowHtmlContent = `<h4>`+shop.shop_name+`</h4>
+                                          <button class="btn btn-primary shop-explore" data-shop-id="`+shop.id+`">Explorer
+                                          </button>`;
+      google.maps.event.addListener(shopMarker,'click',function(e){
+        var infowindow = new google.maps.InfoWindow;
+        infowindow.setContent(this.infoWindowHtmlContent);
+        infowindow.open(map,this);
+      });
+
+      markers.push(shopMarker);
       bounds.extend({lat: parseFloat(shop.latitude),lng: parseFloat(shop.longitude)});
     }
     map.fitBounds(bounds);
     map.setCenter(bounds.getCenter());
 }
+
+$(document).ready(function(){
+
+  //Click on explore to display the shoes based on a given shop
+
+  $('body').on('click', '.shop-explore', function(e){
+    e.preventDefault();
+    if(NaN != parseInt($(this).data('shop-id'))){
+      window.location.href = "./shops/"+$(this).data('shop-id');
+    }
+  });
+
+});

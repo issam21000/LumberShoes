@@ -32,3 +32,6 @@ $app->get('/shoes/{id:[0-9]+}', 'App\Controllers\ShoesController:detailsShoes')-
 $app->get('/shoes/bag', 'App\Controllers\ShoesController:bag')->setName('bag');
 
 
+//Get shoes list based on a given shop
+$app->get('/shops/{shop_id}', 'ShoesController:getShoesByShop')->setName('shoes_by_shop');
+
