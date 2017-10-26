@@ -4,6 +4,13 @@
 		{{ parent() }} Details
 	{% endblock %}
 
+	{% block modal %}
+		<link rel="stylesheet" type="text/css" href="/Assets/css/modal.css">
+		<link rel="stylesheet" type="text/css" href="/Assets/css/datepicker.min.css">
+		<link rel="stylesheet" type="text/css" href="/Assets/css/datepicker3.min.css">
+		<script type="text/javascript" src="/Assets/js/modal.js"></script>		
+		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.min.js"></script>		
+	{% endblock %}
 	
 
 	{% block content %}
@@ -31,12 +38,38 @@
 			
 			<div class="priceAddBag">
 				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
-				<div class="addBagDetails">
-					<a href="#">Add to bag</a>
+			
+						<div class="addBagDetails">
+							<button id="buttonDateRental" data-dismiss="modal">Add to bag</button>
+						</div>					
 				</div>
 			</div>
 			
 		</div>
 
+		<div class="modal fade" id="dateRentalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	    	<div class="modal-dialog">
+				<div class="modal-container">
+					<h1>Enter your rental dates</h1><br>
+					<form id="eventForm" method="post" class="form-horizontal">
+							<div>
+							      <label for="startDate">Start date :</label>
+							      <input id="startDate" type="date" name="startDate" value="">
+	  						</div>
+
+							  <div>
+							      <label for="date2">End date :</label>
+							      <input id="endDate" type="date" name="endDate" value="">
+							  </div>					    
+
+					    <div class="form-group">
+					        <div class="col-xs-11">
+					            <input type="submit" name="submit" class="submit modal-submit" value="Submit">
+					        </div>
+					    </div>
+					</form>							  
+				</div>
+			</div>
+		</div>	
+
 	{% endblock %}
-	
