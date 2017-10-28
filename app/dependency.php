@@ -99,12 +99,12 @@ $container['ShoesController'] = function($c){
 };
 
 
-$container['App\Controllers\HomeController'] = function ($c) {
+$container['HomeController'] = function ($c) {
     return new App\Controllers\HomeController($c
     );
 };
 
-$container['App\Controllers\UserController'] = function ($c) {
+$container['UserController'] = function ($c) {
     return new App\Controllers\UserController($c);
 };
 # -----------------------------------------------------------------------------

@@ -304,7 +304,7 @@ span.ShoesRental{
 	overflow: hidden;
 }
 
-.priceAddBag a{
+#buttonDateRental{
   background-color: #2bb04a;
   text-align: center;
   text-decoration: none;
@@ -316,6 +316,7 @@ span.ShoesRental{
   display: block;
   padding: 3%;
   margin-top: 4.2%;
+  width: 100%;
 }
 
 .priceDetails{
