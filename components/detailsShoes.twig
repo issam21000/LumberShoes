@@ -37,13 +37,14 @@
 			</div>
 			<div class="priceAddBag">
 				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
-				
-					
-						
+
+				<div class="addBagDetails">
+					<a class="add-to-bag" data-shoes-id="{{ shoes.id }}" href="">Add to bag</a>
 				</div>
 			</div>
 			
 		</div>
+		<!-- Modal -->
 
 		<div class="modal fade" id="dateRentalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	    	<div class="modal-dialog">
@@ -70,4 +71,27 @@
 			</div>
 		</div>	
 
+	{% endblock %}
+	
+
+	{% block custom_assets %}
+		<script type="text/javascript">
+		$(document).ready(event => {
+
+			$('.add-to-bag').click(e => {
+				e.preventDefault();
+				$.ajax({
+					method: 'GET',
+					url: "{{path_for('check_connection')}}",
+					dataType: 'json',
+					error: function(error){
+						window.location.href = "{{path_for('bag')}}";
+					},
+					success: function(response){
+						$('#dateRentalModal').modal('show');
+					}
+				});
+			});
+		});
+		</script>
 	{% endblock %}

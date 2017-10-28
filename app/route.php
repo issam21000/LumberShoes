@@ -35,3 +35,7 @@ $app->get('/shoes/bag', 'ShoesController:bag')->setName('bag');
 //Get shoes list based on a given shop
 $app->get('/shops/{shop_id}', 'ShoesController:getShoesByShop')->setName('shoes_by_shop');
 
+
+//Check if the user is connected
+
+$app->get('/user/check_authentication', 'UserController:checkSession')->setName('check_connection');
