@@ -32,11 +32,53 @@
 			<div class="priceAddBag">
 				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
 				<div class="addBagDetails">
-					<a href="#">Add to bag</a>
+					<a class="add-to-bag" data-shoes-id="{{ shoes.id }}" href="">Add to bag</a>
 				</div>
 			</div>
 			
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Titre du modal</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+		        <button type="button" class="btn btn-primary">Enregistrer</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 
 	{% endblock %}
 	
+
+	{% block custom_assets %}
+		<script type="text/javascript">
+		$(document).ready(event => {
+
+			$('.add-to-bag').click(e => {
+				e.preventDefault();
+				$.ajax({
+					method: 'GET',
+					url: "{{path_for('check_connection')}}",
+					dataType: 'json',
+					error: function(error){
+						window.location.href = "{{path_for('register')}}";
+					},
+					success: function(response){
+						$('#myModal').modal('show');
+					}
+				});
+			});
+		});
+		</script>
+	{% endblock %}

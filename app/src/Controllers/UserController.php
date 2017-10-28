@@ -120,6 +120,14 @@ final class UserController extends BaseController
         }
     }
 
+    public function checkSession(Request $request, Response $response, $args){
+        if(isset($_SESSION['isConnected'])){
+            return $response->withJson(array('isconnected' => true), 200);
+        }else{
+            return $response->withJson(array('isconnected' => false), 401);
+        }
+    }
+
     public function userLogOut(Request $request, Response $response, $args){
         unset($_SESSION['isConnected']);
         setcookie("remember",null,-1,"/");
