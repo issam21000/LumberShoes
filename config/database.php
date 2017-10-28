@@ -9,7 +9,7 @@ $capsule->addConnection([
     'host'      => 'localhost',
     'database'  => 'ShoesRental',
     'username'  => 'root',
-    'password'  => '',
+    'password'  => 'root',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => 'ShRent_',
