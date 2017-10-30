@@ -16,8 +16,8 @@ final class UserController extends BaseController
 
     public function index(Request $request, Response $response, $args)
     {
-        $shoes=Shoes::all();
-        return $this->container->view->render($response, 'homepage.twig',['shoes' => $shoes]);
+        $lastShoes=Shoes::OrderBy('created_at','DESC')->limit(9)->get();
+        return $this->container->view->render($response, 'homepage.twig',['shoes' => $lastShoes]);
     }
 
     public function registerUser(Request $request, Response $response, $args)
