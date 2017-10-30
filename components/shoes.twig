@@ -25,13 +25,13 @@
 				
 				<div class="shoes"> 				
 					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>
-					<a href="{{ path_for('details', {'id': row.id}) }}" title="More details"><strong>{{ row.brand.legend }}</strong></a>
+					<strong>{{ row.brand.legend }}</strong>
 					<div class="shoesDescription"> </div><br>
 					<div> <h5><strong>Size : {{ row.size }}</strong></h5> </div>
 					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€00</sup><span></strong> </div><br>
 								
-					<div class="ajouterPanier margin-bottom">
-						<a href="{{ path_for('bag') }}">Add to bag</a>
+					<div class="moreDtails margin-bottom">
+						<a href="{{ path_for('details', {'id': row.id}) }}">More details</a>
 					</div>
 				</div>
 			{% else %}
