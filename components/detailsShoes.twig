@@ -35,9 +35,9 @@
 				 <p>rent and ship by <span class="ShoesRental">ShoesRental</span>
 				 <p><b>The delivery :</b><br>Free delivery<br>Usually delivered in 1 to 3 days<br>Or immediate withdrawal in shop</p>
 			</div>
-			
 			<div class="priceAddBag">
 				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
+
 				<div class="addBagDetails">
 					<a class="add-to-bag" data-shoes-id="{{ shoes.id }}" href="">Add to bag</a>
 				</div>
@@ -45,25 +45,6 @@
 			
 		</div>
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Titre du modal</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-		        <button type="button" class="btn btn-primary">Enregistrer</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
 
 		<div class="modal fade" id="dateRentalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	    	<div class="modal-dialog">
@@ -104,15 +85,13 @@
 					url: "{{path_for('check_connection')}}",
 					dataType: 'json',
 					error: function(error){
-						window.location.href = "{{path_for('register')}}";
+						window.location.href = "{{path_for('bag')}}";
 					},
 					success: function(response){
-						$('#myModal').modal('show');
+						$('#dateRentalModal').modal('show');
 					}
 				});
 			});
 		});
 		</script>
 	{% endblock %}
-=======
->>>>>>> b78a281e58279ac04e2e5ef229c49d3f1cb7b17d
