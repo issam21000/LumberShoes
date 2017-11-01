@@ -14,12 +14,13 @@ class Shoes extends Model
 		return $this->belongsTo('\App\Models\Brand','brand_id');  
 	}
 
-  public function orderLine(){
+
+  public function orderLines(){
 		return $this->hasMany('\App\Models\OrderLine');  
 	}
 
   public function shop(){
-		return $this->belongsTo('\App\Models\Shop','shop_id');  
+		return $this->belongsTo('\App\Models\Shop','shop_id');
 	}
 
 }

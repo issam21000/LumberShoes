@@ -3,14 +3,6 @@
 	{% block title %}
 		{{ parent() }} Details
 	{% endblock %}
-
-	{% block modal %}
-		<link rel="stylesheet" type="text/css" href="/Assets/css/modal.css">
-		<link rel="stylesheet" type="text/css" href="/Assets/css/datepicker.min.css">
-		<link rel="stylesheet" type="text/css" href="/Assets/css/datepicker3.min.css">
-		<script type="text/javascript" src="/Assets/js/modal.js"></script>		
-		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.min.js"></script>		
-	{% endblock %}
 	
 
 	{% block content %}
@@ -44,54 +36,142 @@
 			</div>
 			
 		</div>
+
 		<!-- Modal -->
+		<div class="modal fade" id="alert_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title alert-modal-title">Ajouter {{shoes.brand.legend}} à votre panier de locations</h4>
+                    </div>
+                    <!-- Body -->
+                    <form action="#" class="form-horizontal cmxform" id="addtaskForm">
+	                    <div class="modal-body">
+                            <div class="form-group ">
+                                <label for="task_date" class="control-label col-md-4">Date début</label>
+                                <div class="col-md-6 col-xs-11">
+                                        <input class="form-control" id="start_date" name="start_date" type="text" readonly="readonly" required />
+                                </div>
+                            </div>
 
-		<div class="modal fade" id="dateRentalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-	    	<div class="modal-dialog">
-				<div class="modal-container">
-					<h1>Enter your rental dates</h1><br>
-					<form id="eventForm" method="post" class="form-horizontal">
-							<div>
-							      <label for="startDate">Start date :</label>
-							      <input id="startDate" type="date" name="startDate" value="">
-	  						</div>
+                            <div class="form-group ">
+                                <label for="task_date" class="control-label col-md-4">Date Fin</label>
+                                <div class="col-md-6 col-xs-11">
+                                        <input class="form-control" id="end_date" name="end_date" type="text" readonly="readonly" required />
+                                </div>
+                            </div>
+	                    </div>
+	                    <!-- Footer -->
+	                    <div class="modal-footer">
+	                        <button class="btn btn-danger close-modal" type="button" data-dismiss="modal">Fermer</button>
+	                        <button type="submit" class="btn btn-success" type="button" id="save">Ajouter</button>
+	                    </div>
 
-							  <div>
-							      <label for="date2">End date :</label>
-							      <input id="endDate" type="date" name="endDate" value="">
-							  </div>					    
-
-					    <div class="form-group">
-					        <div class="col-xs-11">
-					            <input type="submit" name="submit" class="submit modal-submit" value="Submit">
-					        </div>
-					    </div>
-					</form>							  
-				</div>
-			</div>
-		</div>	
+	                </form>
+                </div>
+            </div>
+        </div>
 
 	{% endblock %}
 	
 
 	{% block custom_assets %}
+		<link rel="stylesheet" type="text/css" href="/Assets/css/bootstrap-datepicker.css">	
+		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.fr.js"></script>
 		<script type="text/javascript">
-		$(document).ready(event => {
+			$(document).ready(event => {
 
-			$('.add-to-bag').click(e => {
-				e.preventDefault();
-				$.ajax({
-					method: 'GET',
-					url: "{{path_for('check_connection')}}",
-					dataType: 'json',
-					error: function(error){
-						window.location.href = "{{path_for('bag')}}";
-					},
-					success: function(response){
-						$('#dateRentalModal').modal('show');
+				let orderLines = {{ shoes.orderLines|json_encode()|raw }};
+				let unavailablePeriods = [];
+				if(orderLines.length > 0){
+					for(let orderLine of orderLines){
+						unavailablePeriods.push({
+							startDate: new Date(orderLine.start_date),
+							endDate: new Date(orderLine.end_date)
+						});
 					}
+					console.log(unavailablePeriods);
+				}
+				$('.add-to-bag').click(e => {
+					e.preventDefault();
+					$.ajax({
+						method: 'GET',
+						url: "{{path_for('check_connection')}}",
+						dataType: 'json',
+						error: function(error){
+							window.location.href = "{{path_for('bag')}}";
+						},
+						success: function(response){
+							$('#alert_modal').modal('toggle');
+						}
+					});
+				});
+
+
+
+				//Date filtering callbacks
+
+				let renderAvailableStartDates = function(dt){
+					if(dt instanceof Date){
+						for(let period of unavailablePeriods){
+							if(period.startDate.getTime() < (dt.getTime() + 86400000)
+								&& period.endDate.getTime() > dt.getTime()){
+								return false;
+							}
+						}
+					}
+					return true;
+				};
+
+
+
+				let renderAvailableEndDates = function(dt){
+					let startDate = $('#start_date').datepicker('getDate').getTime();
+					//console.log(startDate);
+					//console.log(startDate);
+					if(dt instanceof Date && startDate != undefined){
+						for(let period of unavailablePeriods){
+							if(period.startDate.getTime() < startDate){
+								continue;
+							}
+							if(dt.getTime() <= startDate ||
+								period.startDate.getTime() < dt.getTime()
+
+								){
+								console.log('unavailable '+dt);
+								return false;
+							}
+						}
+					}
+					return true;
+				};
+
+				//Rental start & end datepickers
+
+				$('#start_date').datepicker({
+					language: 'fr',
+					startDate: 'current',
+					autoclose: true,
+					beforeShowDay: renderAvailableStartDates
+				});
+				$('#start_date').datepicker().on('changeDate', function(e) {
+					$('#end_date').val('');
+					$('#end_date').datepicker('destroy');
+					$('#end_date').datepicker({
+						language: 'fr',
+						startDate: 'current',
+						autoclose: true,
+						beforeShowDay: renderAvailableEndDates
+					});
+			    });
+				$('#end_date').datepicker({
+					language: 'fr',
+					startDate: 'current',
+					autoclose: true,
+					daysOfWeekDisabled: [0, 1, 2, 3, 4, 5, 6]
 				});
 			});
-		});
 		</script>
 	{% endblock %}
