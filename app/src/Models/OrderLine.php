@@ -11,11 +11,11 @@ class OrderLine extends Model
   public $timestamps=true;
 
   public function shoes(){
-		return $this->belongsTo('\App\Models\Shoes','id_shoes');  
+		return $this->belongsTo('\App\Models\Shoes','shoes_id');  
 	}
 
   public function order(){
-		return $this->belongsTo('\App\Models\Order','id_order');  
+		return $this->belongsTo('\App\Models\Order','order_id');  
 	}
 
 }

@@ -11,7 +11,7 @@ class Brand extends Model
   public $timestamps=true;
 
   public function shoes(){
-		return $this->hasMany('\App\Models\Shoes','id_shoes');  
+		return $this->hasMany('\App\Models\Shoes');  
 	}
 
 }

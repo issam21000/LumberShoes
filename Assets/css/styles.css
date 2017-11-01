@@ -334,3 +334,63 @@ span.ShoesRental{
 .shoes>a{
 	color:#333;
 }
+
+/*Search barre Shoes*/
+
+.searchShoe{
+	margin-left: 3%;
+	margin-top: 2%;
+}
+
+input.searchBarShoes {
+    width: 255px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../fonts/searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-bottom: 1%;
+    margin-top: 2%;
+}
+input.searchBarShoes:focus {
+    width: 100%;
+}
+
+.styled-select.slate {
+   background: url(../fonts/2e3ybe1.jpg) no-repeat right center;
+   height: 34px;
+   width: 240px;
+}
+
+.styled-select.slate select {
+   border: 1px solid #ccc;
+   font-size: 16px;
+   height: 34px;
+   width: 268px;
+}
+
+.styled-select {
+   background: url(../fonts/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; 
+   width: 268px;
+}
+
+#brandForm, #priceForm{
+	display: inline-block;
+}

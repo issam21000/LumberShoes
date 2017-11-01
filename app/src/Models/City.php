@@ -11,7 +11,7 @@ class City extends Model
   public $timestamps=true;
 
   public function shop(){
-		return $this->hasMany('\App\Models\Shop','id_shop');  
+		return $this->hasMany('\App\Models\Shop');  
 	}
 
 }

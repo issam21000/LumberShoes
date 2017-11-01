@@ -11,12 +11,12 @@ class Shop extends Model
   public $timestamps=true;
 
   public function shoes(){
-		return $this->hasMany('\App\Models\Shoes','id');  
+		return $this->hasMany('\App\Models\Shoes');  
 	}
 
 
   public function city(){
-		return $this->belongsTo('\App\Models\City','id_city');
+		return $this->belongsTo('\App\Models\City','city_id');
 	}
 
 }

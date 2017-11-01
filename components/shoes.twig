@@ -20,6 +20,39 @@
 	    	</div>
 		{% endif %}
 
+		<div class="searchShoe">
+			<form method="get" action="/index.php/catalogue/recherche">
+				<input class="searchBarShoes" type="text" name="query" placeholder="Search for a shoe">
+				<button class="btn btn-primary" type="submit" name="search" value="submit">Search</button>
+			</form>
+	
+
+		
+			<form id="brandForm">
+				<div class="styled-select slate">
+					<select id="brandSelect">
+						<option value="all">All Shoes</option>
+						<option value="" </option>
+						
+					</select>
+				</div>
+			</form>
+
+			<form id="priceForm" >
+				<label for="PrixTri">Sort by :</label>					
+					<div class="styled-select slate">
+						<select id="priceSelect">
+							<option value=>Price</option>
+							<option value="" >Ascending price</option>
+							<option value="">Decreasing price</option>
+								
+						</select>
+					</div>					
+			</form>
+
+		</div>
+
+
 		<div class="shoesContainer">
 			{% for row in shoes %}
 				
@@ -35,7 +68,7 @@
 					</div>
 				</div>
 			{% else %}
-				<h2>Aucune chaussure dans ce magasin</h2>
+				<h2>No shoes in this shop</h2>
 			{% endfor %}
 		</div>
 

@@ -11,11 +11,11 @@ class Order extends Model
   public $timestamps=true;
 
   public function orderLine(){
-		return $this->hasMany('\App\Models\OrderLine','id_orderLine');  
+		return $this->hasMany('\App\Models\OrderLine');  
 	}
 
   public function user(){
-		return $this->belongsTo('\App\Models\User','id_user');  
+		return $this->belongsTo('\App\Models\User','user_id');  
 	}
 
 }

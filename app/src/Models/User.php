@@ -11,8 +11,7 @@ class User extends Model
   public $timestamps=true;
 
 
-  public function order(){
-		return $this->hasOne('\App\Models\Order','id_order');  
+  public function orders(){
+		return $this->hasMany('\App\Models\Order');  
 	}
-
 }

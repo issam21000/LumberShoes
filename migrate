@@ -14,7 +14,7 @@ class Migrator {
      */
     public function migrate() {
         /**
-         * create table for sentinel user
+         * create User table
          */
         if (!Capsule::schema()->hasTable('User')) {
             Capsule::schema()->create('User', function($table)
@@ -40,7 +40,7 @@ class Migrator {
         }
 
         /**
-         * create table for sentinel order
+         * create Order table
          */
         if (!Capsule::schema()->hasTable('Order')) {
             Capsule::schema()->create('Order', function($table)

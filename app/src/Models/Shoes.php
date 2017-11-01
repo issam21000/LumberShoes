@@ -11,15 +11,15 @@ class Shoes extends Model
   public $timestamps=true;
   
   public function brand(){
-		return $this->belongsTo('\App\Models\Brand','id_brand');  
+		return $this->belongsTo('\App\Models\Brand','brand_id');  
 	}
 
   public function orderLine(){
-		return $this->hasMany('\App\Models\OrderLine','id_orderLine');  
+		return $this->hasMany('\App\Models\OrderLine');  
 	}
 
   public function shop(){
-		return $this->belongsTo('\App\Models\Shop','id_shop');  
+		return $this->belongsTo('\App\Models\Shop','shop_id');  
 	}
 
 }
