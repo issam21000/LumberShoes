@@ -52,10 +52,10 @@ final class ShoesController extends BaseController
     }
 
     public function searchShoes(Request $request, Response $response, $args){
-       
+        
         $search=$_GET['query'];
         if(null !== $_GET && $_GET['search']=='submit'){
-            $shoes=Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->distinct()->get(); 
+            $shoes=Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->orWhereIn('brand_id', Brand::where('legend','like',"%$search%")->distinct()->get())->distinct()->get();; 
         } 
         return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes]);          
     }
