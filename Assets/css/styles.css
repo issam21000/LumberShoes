@@ -204,6 +204,15 @@ footer div{
 .margin-bottom{
 	margin-bottom: 1em;
 }
+
+.legendBrand{
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.modelShoes{
+	font-weight: bold;
+}
 .price, .shoes span{
 	
 	font-size: 1.3em;

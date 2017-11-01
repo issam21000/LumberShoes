@@ -21,7 +21,7 @@
 		{% endif %}
 
 		<div class="searchShoe">
-			<form method="get" action="/index.php/catalogue/recherche">
+			<form method="get" action="{{ path_for('searchShoes') }}">
 				<input class="searchBarShoes" type="text" name="query" placeholder="Search for a shoe">
 				<button class="btn btn-primary" type="submit" name="search" value="submit">Search</button>
 			</form>
@@ -42,7 +42,7 @@
 				<label for="PrixTri">Sort by :</label>					
 					<div class="styled-select slate">
 						<select id="priceSelect">
-							<option value=>Price</option>
+							<option value="">Price</option>
 							<option value="" >Ascending price</option>
 							<option value="">Decreasing price</option>
 								
@@ -58,9 +58,9 @@
 				
 				<div class="shoes"> 				
 					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>
-					<strong>{{ row.brand.legend }}</strong>
-					<div class="shoesDescription"> </div><br>
-					<div> <h5><strong>Size : {{ row.size }}</strong></h5> </div>
+					<div class='legendBrand'>{{ row.brand.legend }}</div>
+					<div class="modelShoes">{{ row.model }}</div>					
+					<h5><strong>Size : {{ row.size }}</strong></h5>
 					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€00</sup><span></strong> </div><br>
 								
 					<div class="moreDtails margin-bottom">

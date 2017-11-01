@@ -18,7 +18,7 @@ $app->post('/connecter', 'UserController:userConnected')
 
 $app->get('/shoes', 'ShoesController:displayShoes')->setName('shoes');
 
-$app->get('/search', 'SearchController:---')->setName('search');
+$app->get('/search', 'ShoesController:searchShoes')->setName('searchShoes');
 
 //Stores search on the map page
 $app->get('/shops','ShopController:all')->setName('all_shops');

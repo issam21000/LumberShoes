@@ -126,6 +126,7 @@ class Migrator {
                 $table->integer('id', true);
                 $table->integer('brand_id');
                 $table->integer('shop_id');
+                $table->string('model');
                 $table->string('image');
                 $table->integer('size');
                 $table->integer('price_per_day');
