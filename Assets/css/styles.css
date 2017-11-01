@@ -245,11 +245,11 @@ footer div{
     margin-right: 4%; 
 }
 */
-.addBag  a{
+a.add-to-bag{
   background-color: #2bb04a;
   text-align: center;
   text-decoration: none;
-  padding: 18px 12px 18px 12px;
+  padding: 12px 12px 13px 12px;
   border: 1px solid #2bb04a;
   display: inline-block;
   font-size: 1em;
@@ -258,7 +258,12 @@ footer div{
   display: block;
   width: 100%;
   height: auto; 
+  font-weight: bold;
 }
+a.add-to-bag:hover{
+	background-color:#32CD32;
+}
+
 
 .available, .notAvailable{
 	color:green;
