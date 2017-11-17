@@ -408,3 +408,7 @@ input.searchBarShoes:focus {
 #brandForm, #priceForm{
 	display: inline-block;
 }
+.shoesEmpty{
+	color:red;
+	margin-left: 3%;
+}

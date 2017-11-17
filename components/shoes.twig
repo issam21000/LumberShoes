@@ -5,9 +5,20 @@
 	{% endblock %}
 
 	
+{% block custom_assets %}
+	<script>
+		$(document).on('change', '#brandForm', function(){
+		let val = $(this).find("select").val();
+		window.location.href = "/shoes/"+val;
+		});
 
+		$(document).on('change', '#priceForm', function(){
+		let val = $(this).find("select").val();
+		window.location.href = val;
+		});
+	</script>
+	{% endblock %}
 	{% block content %}
-
 		{% if flash.getMessage('InfoDeconnected')[0] %}
 	   		<div class="alert alert-danger">
 	        	<b>{{ flash.getMessage('InfoDeconnected')[0] }}</b>
@@ -30,21 +41,23 @@
 		
 			<form id="brandForm">
 				<div class="styled-select slate">
-					<select id="brandSelect">
-						<option value="all">All Shoes</option>
-						<option value="" </option>
+					<select name="brandSelect">
+						<option value="all" >All Shoes</option>
+						{% for row in brand %}
+							<option value="{{ row.id }}" {% if row.id ==id %} selected="selected" {% endif %}>{{ row.legend }}</option>
+						{% endfor %}
 						
 					</select>
 				</div>
 			</form>
 
-			<form id="priceForm" >
+			<form id="priceForm">
 				<label for="PrixTri">Sort by :</label>					
 					<div class="styled-select slate">
-						<select id="priceSelect">
-							<option value="">Price</option>
-							<option value="" >Ascending price</option>
-							<option value="">Decreasing price</option>
+						<select id="priceSelect" name="priceSelect">
+							<option value="" >Price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=asc">Ascending price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=desc">Decreasing price</option>
 								
 						</select>
 					</div>					
@@ -67,9 +80,16 @@
 						<a href="{{ path_for('details', {'id': row.id}) }}">More details</a>
 					</div>
 				</div>
-			{% else %}
-				<h2>No shoes in this shop</h2>
-			{% endfor %}
-		</div>
+			{# {% else %}
+
+				<h2>No shoes in this shop</h2> #}
+			{% endfor %}			
+
+		{% if shoes is empty %}
+    		<div class="shoesEmpty">
+	        	<h3>No shoe matching your search.</h3>
+	    	</div>
+		{% endif %}
+		</div>		
 
 	{% endblock %}

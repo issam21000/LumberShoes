@@ -16,9 +16,11 @@ $app->post('/connecter', 'UserController:userConnected')
 ->setName('connected');
 
 
-$app->get('/shoes', 'ShoesController:displayShoes')->setName('shoes');
+$app->get('/shoes/all', 'ShoesController:searchShoes')->setName('shoes');
 
-$app->get('/search', 'ShoesController:searchShoes')->setName('searchShoes');
+$app->get('/shoes/{id:[0-9]+}', 'ShoesController:searchShoes')->setname('brand');
+
+$app->get('/shoes/search', 'ShoesController:searchShoes')->setName('searchShoes');
 
 //Stores search on the map page
 $app->get('/shops','ShopController:all')->setName('all_shops');
@@ -27,7 +29,7 @@ $app->get('/logOut','UserController:userLogOut')->setName('logOut');
 
 $app->post('/postContact', 'UserController:postContact')->setName('postContact');
 
-$app->get('/shoes/{id:[0-9]+}', 'ShoesController:detailsShoes')->setName('details');
+$app->get('/shoes/details/{id:[0-9]+}', 'ShoesController:detailsShoes')->setName('details');
 
 $app->get('/shoes/bag', 'ShoesController:bag')->setName('bag');
 
