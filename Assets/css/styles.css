@@ -313,7 +313,7 @@ span.ShoesRental{
 	border:1px solid #d7d9e4 ;
 	margin-left:5%;
 	margin-top: 2%;
-	height: 200px;
+	height: auto;
 	width: 20%;
 	overflow: hidden;
 }
@@ -411,4 +411,67 @@ input.searchBarShoes:focus {
 .shoesEmpty{
 	color:red;
 	margin-left: 3%;
+}
+
+
+.bag-line-container{
+	background-color: #dbdbdb;
+	height: auto;
+	margin: auto;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+.container{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.item-image{
+	max-width: 100%;
+	height:auto ;
+}
+
+.title{
+	font-size: 1.2em;
+	margin-top: 0;
+}
+
+.dateInfo {
+	font-weight: bold;
+}
+
+.dateInfo span{
+	font-weight: normal;
+}
+
+.priceInfo{
+	color: red;
+	font-weight: bold;
+}
+
+.priceInfo span{
+	color: black;
+	font-weight: normal;
+}
+
+.totalInfo{
+	margin-bottom: 40px;
+}
+
+.totalInfo hr{
+	border-top: 1px solid #333;
+}
+
+.totalInfo .totalInfoText{
+	color: red;
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.totalInfo .totalInfoText span{
+	display: block;
+	margin-bottom: 15px;
+	font-size: 1.1em;
+	color: black;
 }

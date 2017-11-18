@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Shoes;
 use App\Models\Brand;
 use App\Models\Shop;
+use App\Models\Order;
+use App\Models\OrderLine;
 use Slim\Flash\Messages;
 
 final class ShoesController extends BaseController
@@ -47,19 +49,17 @@ final class ShoesController extends BaseController
         if(null != $shop){
             $shoes = $shop->shoes;
             if(!empty($shoes)){
-                return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes]);
+                return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes, 'brand' => Brand::all()]);
             }
         }
     }
 
     public function searchShoes(Request $request, Response $response, $args){
-        $brand=Brand::all();
-        $search=$_GET['query'];
+        $brand = Brand::all();
 
-         if(null !== $_GET && $_GET['search']=='submit'){
-            $shoes=Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->orWhereIn('brand_id', Brand::where('legend','like',"%$search%")->distinct()->get())->distinct()->get();
+         if(isset($_GET['search']) && $_GET['search'] == 'submit'){
+            $shoes = Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->orWhereIn('brand_id', Brand::where('legend','like',"%$search%")->distinct()->get())->distinct()->get();
             return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand] );
-      
         }
 
         if($request->getParam('orderByPrice')){
@@ -69,7 +69,7 @@ final class ShoesController extends BaseController
                 return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand, 'id'=>$args['id'], 'requestedBrand' => $requestedBrand] );
              }else{
                 $shoes = Shoes::orderBy('price_per_day', $request->getParam('orderByPrice'))->get();
-                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand, 'id'=>$args['id']]);
+                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand]);
              }
         }else{
             if(isset($args['id'])){
@@ -81,7 +81,6 @@ final class ShoesController extends BaseController
                 return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand] );
              }
         }
-
-       
     }
+
 }

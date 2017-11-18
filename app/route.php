@@ -41,3 +41,28 @@ $app->get('/shops/{shop_id}', 'ShoesController:getShoesByShop')->setName('shoes_
 //Check if the user is connected
 
 $app->get('/user/check_authentication', 'UserController:checkSession')->setName('check_connection');
+
+
+//Add Shoes To Bag
+
+$app->post('/bag/add', 'OrderController:addToBag')->setName('add_to_bag');
+
+//Display bag content
+
+$app->get('/bag', 'OrderController:displayBag')->setName('display_bag');
+
+//Remove an orderLine from bag
+
+$app->get('/bag/remove/{id:[0-9]+}', 'OrderController:removeFromBag')->setName('remove_from_bag');
+
+//Validate the active order / Clean the bag
+
+$app->post('/bag/validate', 'OrderController:validateOrder')->setName('validate_order');
+
+//Display orders history
+
+$app->get('/orders', 'OrderController:getOldOrdersList')->setName('orders_list');
+
+//Display Order details (paid order)
+
+$app->get('/orders/{id:[0-9]+}', 'OrderController:getOldOrderDetails')->setName('order_details');

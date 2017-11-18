@@ -28,7 +28,7 @@
 				 <p><b>The delivery :</b><br>Free delivery<br>Usually delivered in 1 to 3 days<br>Or immediate withdrawal in shop</p>
 			</div>
 			<div class="priceAddBag">
-				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€00</sup><span></div><br>
+				<div class="priceDetails">Price per day : <span>{{ shoes.price_per_day }}<sup>€</sup><span></div><br>
 
 				<div class="addBagDetails">
 					<a class="add-to-bag" data-shoes-id="{{ shoes.id }}" href="">Add to bag</a>
@@ -46,7 +46,7 @@
                         <h4 class="modal-title alert-modal-title">Add {{shoes.brand.legend}} in your rental bag</h4>
                     </div>
                     <!-- Body -->
-                    <form action="#" class="form-horizontal cmxform" id="addtaskForm">
+                    <form action="{{path_for('add_to_bag')}}" method="post" class="form-horizontal cmxform" id="addToBag">
 	                    <div class="modal-body">
                             <div class="form-group ">
                                 <label for="task_date" class="control-label col-md-4">Start date</label>
@@ -61,6 +61,7 @@
                                         <input class="form-control" id="end_date" name="end_date" type="text" readonly="readonly" required />
                                 </div>
                             </div>
+                            <input type="hidden" name="shoes_id" value="{{shoes.id}}"/>
 	                    </div>
 	                    <!-- Footer -->
 	                    <div class="modal-footer">
@@ -128,24 +129,25 @@
 
 
 				let renderAvailableEndDates = function(dt){
+					console.log('rendering available end dates');
 					let startDate = $('#start_date').datepicker('getDate').getTime();
-					//console.log(startDate);
-					//console.log(startDate);
-					if(dt instanceof Date && startDate != undefined){
-						for(let period of unavailablePeriods){
-							if(period.startDate.getTime() < startDate){
-								continue;
+					if(dt.getTime() <= startDate){
+						return false;
+					}else{
+						if(startDate != undefined){
+							for(let period of unavailablePeriods){
+								if(period.startDate.getTime() < startDate){
+									continue;
+								}
+								if(period.startDate.getTime() < dt.getTime()){
+									return false;
+								}
 							}
-							if(dt.getTime() <= startDate ||
-								period.startDate.getTime() < dt.getTime()
-
-								){
-								console.log('unavailable '+dt);
-								return false;
-							}
+							return true;
+						}else{
+							return true;
 						}
 					}
-					return true;
 				};
 
 				//Rental start & end datepickers

@@ -3,6 +3,13 @@
 
 $container = $app->getContainer();
 
+
+//Global variables
+
+$container['images_path'] = __DIR__.'/../Assets/images/';
+
+$container['products_images_path'] = __DIR__.'/../Assets/images/shoes/';
+
 // view renderer
 $container['renderer'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
@@ -25,6 +32,8 @@ $container['view'] = function ($c) {
     // $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental');
     $view->getEnvironment()->addGlobal('session', $_SESSION);    
     $view->getEnvironment()->addGlobal('flash', $c['flash']);
+    $view->getEnvironment()->addGlobal('images_path', '/Assets/images/');
+    $view->getEnvironment()->addGlobal('products_images_path', '/Assets/images/shoes/');
     return $view;
 };
 
@@ -107,6 +116,11 @@ $container['HomeController'] = function ($c) {
 $container['UserController'] = function ($c) {
     return new App\Controllers\UserController($c);
 };
+
+$container['OrderController'] = function ($c) {
+    return new App\Controllers\OrderController($c);
+};
+
 # -----------------------------------------------------------------------------
 # Factories Models
 # -----------------------------------------------------------------------------

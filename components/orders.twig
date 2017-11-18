@@ -1,0 +1,61 @@
+{% extends 'templates/base_layout.twig' %}
+
+	{% block title %}
+		{{ parent() }} Mon panier
+	{% endblock %}
+
+
+	{% block content %}
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h3>My Orders</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					{% if orders|length > 0 %}
+						<table id="orders" class="display" cellspacing="0" width="100%">
+					        <thead>
+					            <tr>
+					            	<th>Order Number</th>
+					                <th>Date</th>
+					                <th>Number of items</th>
+					                <th>Total price</th>
+					                <th></th>
+					            </tr>
+					        </thead>
+					        <tfoot>
+					            <tr>
+					            	<th>Order Number</th>
+					                <th>Date</th>
+					                <th>Number of items</th>
+					                <th>Total price</th>
+					                <th></th>
+					            </tr>
+					        </tfoot>
+					        <tbody>
+					            {% for order in orders %}
+					            	<tr>
+					            		<td>{{ order.id }}</td>
+					            		<td>{{ order.order_date|date('d-m-Y') }}</td>
+					            		<td>{{ order.orderLines|length }}</td>
+					            		<td>{{ order.total_price }}€</td>
+					            		<td><a href="{{ path_for('order_details', {id: order.id}) }}" class="btn btn-primary">Details</a></td>
+					            	</tr>
+					            {% endfor %}
+					        </tbody>
+					    </table>
+					{% else %}
+						<h3>You have no orders yet</h3>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block custom_assets %}
+		<link rel="stylesheet" type="text/css" href="/Assets/css/datatables.min.css">
+		<script type="text/javascript" src="/Assets/js/datatables.min.js"></script>
+		<script type="text/javascript" src="/Assets/js/orders.js"></script>
+	{% endblock %}

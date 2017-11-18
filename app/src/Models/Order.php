@@ -10,7 +10,7 @@ class Order extends Model
   protected $primarykey ='id';
   public $timestamps=true;
 
-  public function orderLine(){
+  public function orderLines(){
 		return $this->hasMany('\App\Models\OrderLine');  
 	}
 
