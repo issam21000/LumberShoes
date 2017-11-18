@@ -1,0 +1,135 @@
+{% extends 'templates/base_layout.twig' %}
+
+	{% block title %}
+		{{ parent() }} User
+	{% endblock %}
+
+	{% block content %}
+
+			
+			{# <h2><pre>{{ _session.errorSignupUser }}</pre></h2> #}
+
+			<h2 class="section-container">Sign in/join</h2>
+
+			{% if session.errorSignupUser %}
+   				 <div class="alert alert-danger">
+	   				 <b>{{ flash.getMessage('Error')[0] }}</b>
+	   				{% for session in session.errorSignupUser %}	
+	        		 	<p>{{ session }}</p>
+	        		 {% endfor %}
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('Erreur')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('Erreur')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('PassError')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('PassError')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('RegisterSuccss')[0] %}
+   				 <div class="alert alert-success">
+        		<b>{{ flash.getMessage('RegisterSuccss')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('ErrorEmail')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('ErrorEmail')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			{% if flash.getMessage('ErrorLoginBag')[0] %}
+   				 <div class="alert alert-danger">
+        		<b>{{ flash.getMessage('ErrorLoginBag')[0] }}</b>
+    			</div>
+			{% endif %}
+
+			<div class="cont">
+				<form class="form-horizontal" name="connectUser" method="post" action="{{ path_for('connected') }}">
+					<div class="connexion">
+						<h4>Already registered?</h4>
+
+						<div class="col-md-offset-1 col-md-11">
+								<label for="mail">E-mail adress</label>
+								<span class="required">*</span><br>
+								<input class= form-control id="mail" type="text" name="email" placeholder="Enter your email address"/><br>
+								
+						</div>
+
+						<div class="col-md-offset-1 col-md-11">
+								<label for="password">password </label>
+								<span class="required">*</span><br>
+								<input class= form-control id="password" type="password" name="password" placeholder="Enter your password"/><br>
+								
+						</div>
+					  
+					  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-11">
+					      <div class="checkbox">
+					        <label>
+					          <input type="checkbox" name="remember"/> Remember me
+					        </label>
+					      </div>
+					    </div>
+					  </div>
+
+					  <div class="col-md-offset-1 col-md-11">
+							<button class="btn btn-primary" type="submit" value="connect" name="buttonConnect">Sign in</button>
+					  </div>
+					</div>
+				  
+		 
+				</form>
+
+
+				<form name="register"  method="post" action="{{ path_for('enregistrer') }}">
+					<div class="inscription">
+						<h4>New customers ShoesRental ?</h4>	
+
+						<div class="col-md-offset-5 col-md-6">
+								<label for="name">Full name</label>
+								<span class="required">*</span><br>
+								<input class= form-control id="name" type="text" name="name" placeholder="Enter your full name"/><br>
+								
+						</div>				
+
+						<div class="col-md-offset-5 col-md-6">
+							<label for="mail">Email address</label>
+							<span class="required">*</span><br>
+							<input class= form-control id="mail" type="text" name="email" placeholder="Enter your email address"/><br>						
+						</div>
+
+						<div class="col-md-offset-5 col-md-6">
+							<label for="password">Password</label>
+							<span class="required">*</span><br>
+							<input class= form-control id="password" type="password" name="password" placeholder="Enter your password" /><br>						
+						</div>
+
+						<div class="col-md-offset-5 col-md-6">
+							<label for="password">Confirm password</label>
+							<span class="required">*</span><br>
+							<input class= form-control id="passwordConfirm" type="password" name="passwordConfirm" placeholder="Confirm your password" /><br>						
+						</div>
+
+						<div class="col-md-offset-5 col-md-4">
+								<button class="btn btn-primary" type="submit" value="submit" name="buttonSubmit">Register</button>
+						</div>
+					</div>					
+				</form>
+		</div>
+		<p class="paragraph">
+			<strong>
+				
+				The above form is intended to allow you to open your ShoesRental customer account. Fields marked with an asterisk are mandatory. In the event that these fields are not filled in, the creation of your ShoesRental customer account will be impossible.
+			</strong>
+		</p>
+
+	{% endblock %}
+
+

@@ -1,0 +1,45 @@
+{% extends 'templates/base_layout.twig' %}
+
+	{% block title %}
+		{{ parent() }} Home
+	{% endblock %}
+
+	
+
+	{% block content %}
+
+		<h2 class="section-container">Our last products</h2>
+
+		{% if flash.getMessage('InfoDeconnected')[0] %}
+	   		<div class="alert alert-danger">
+	        	<b>{{ flash.getMessage('InfoDeconnected')[0] }}</b>
+	    	</div>
+		{% endif %}
+
+		{% if flash.getMessage('Info')[0] %}
+	   		<div class="alert alert-success">
+	        	<b>{{ flash.getMessage('Info')[0] }}</b>
+	    	</div>
+		{% endif %}
+
+		<div class="shoesContainer">
+			{% for row in shoes %}
+				
+				<div class="shoes" data-pid=""> 
+							
+					</p>
+					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>			
+					<div class='legendBrand'>{{ row.brand.legend }}</div>
+					<div class="modelShoes">{{ row.model }}</div>
+					<div> <h5><strong>Size : {{ row.size }}</strong></h5> </div>
+					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€00</sup><span></strong> </div><br>
+								
+					<div class="moreDtails margin-bottom">
+						<a href="{{ path_for('details', {'id': row.id}) }}">More details</a>
+					</div>
+				</div>
+			
+			{% endfor %}
+		</div>
+
+	{% endblock %}

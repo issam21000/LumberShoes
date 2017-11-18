@@ -1,3 +1,4 @@
 vendor/
-storage/cache/
-storage/log/
+storage/
+config/database.php
+Assets/images/

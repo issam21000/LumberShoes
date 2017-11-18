@@ -3,6 +3,13 @@
 
 $container = $app->getContainer();
 
+
+//Global variables
+
+$container['images_path'] = __DIR__.'/../Assets/images/';
+
+$container['products_images_path'] = __DIR__.'/../Assets/images/shoes/';
+
 // view renderer
 $container['renderer'] = function ($c) {
     $settings = $c->get('settings')['renderer'];
@@ -22,13 +29,17 @@ $container['view'] = function ($c) {
         $c['request']->getUri()
     ));
     $view->addExtension(new Twig_Extension_Debug());
-	
+    // $view->getEnvironment()->addGlobal('baseUrl', '/issam/ShoesRental');
+    $view->getEnvironment()->addGlobal('session', $_SESSION);    
+    $view->getEnvironment()->addGlobal('flash', $c['flash']);
+    $view->getEnvironment()->addGlobal('images_path', '/Assets/images/');
+    $view->getEnvironment()->addGlobal('products_images_path', '/Assets/images/shoes/');
     return $view;
 };
 
 // Flash messages
 $container['flash'] = function ($c) {
-    return new \Slim\Flash\Messages;
+    return new Slim\Flash\Messages;
 };
 
 // monolog
@@ -76,21 +87,40 @@ $container['activation'] = function ($c) {
 # Action factories Controllers
 # -----------------------------------------------------------------------------
 
-$container['App\Controllers\HomeController'] = function ($c) {
-    return new App\Controllers\HomeController(
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\HomeRepository')
+/*
+** The Base Controller allow access to all the app container services / dependencies
+*/
+
+$container['BaseController'] = function($c){
+  return new \App\Controllers\BaseController($c);
+};
+
+/*
+**Adding the Shop Controller to the container
+*/
+
+$container['ShopController'] = function($c){
+  return new \App\Controllers\ShopController($c);
+};
+
+$container['ShoesController'] = function($c){
+  return new \App\Controllers\ShoesController($c);
+};
+
+
+$container['HomeController'] = function ($c) {
+    return new App\Controllers\HomeController($c
     );
 };
 
-$container['App\Controllers\UserController'] = function ($c) {
-    return new App\Controllers\UserController(
-		$c->get('view'), 
-		$c->get('logger'),
-		$c->get('App\Repositories\UserRepository')
-    );
+$container['UserController'] = function ($c) {
+    return new App\Controllers\UserController($c);
 };
+
+$container['OrderController'] = function ($c) {
+    return new App\Controllers\OrderController($c);
+};
+
 # -----------------------------------------------------------------------------
 # Factories Models
 # -----------------------------------------------------------------------------

@@ -1,0 +1,95 @@
+{% extends 'templates/base_layout.twig' %}
+
+	{% block title %}
+		{{ parent() }} Home
+	{% endblock %}
+
+	
+{% block custom_assets %}
+	<script>
+		$(document).on('change', '#brandForm', function(){
+		let val = $(this).find("select").val();
+		window.location.href = "/shoes/"+val;
+		});
+
+		$(document).on('change', '#priceForm', function(){
+		let val = $(this).find("select").val();
+		window.location.href = val;
+		});
+	</script>
+	{% endblock %}
+	{% block content %}
+		{% if flash.getMessage('InfoDeconnected')[0] %}
+	   		<div class="alert alert-danger">
+	        	<b>{{ flash.getMessage('InfoDeconnected')[0] }}</b>
+	    	</div>
+		{% endif %}
+
+		{% if flash.getMessage('Info')[0] %}
+	   		<div class="alert alert-success">
+	        	<b>{{ flash.getMessage('Info')[0] }}</b>
+	    	</div>
+		{% endif %}
+
+		<div class="searchShoe">
+			<form method="get" action="{{ path_for('searchShoes') }}">
+				<input class="searchBarShoes" type="text" name="query" placeholder="Search for a shoe">
+				<button class="btn btn-primary" type="submit" name="search" value="submit">Search</button>
+			</form>
+	
+
+		
+			<form id="brandForm">
+				<div class="styled-select slate">
+					<select name="brandSelect">
+						<option value="all" >All Shoes</option>
+						{% for row in brand %}
+							<option value="{{ row.id }}" {% if row.id ==id %} selected="selected" {% endif %}>{{ row.legend }}</option>
+						{% endfor %}
+						
+					</select>
+				</div>
+			</form>
+
+			<form id="priceForm">
+				<label for="PrixTri">Sort by :</label>					
+					<div class="styled-select slate">
+						<select id="priceSelect" name="priceSelect">
+							<option value="" >Price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=asc">Ascending price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=desc">Decreasing price</option>
+								
+						</select>
+					</div>					
+			</form>
+
+		</div>
+
+
+		<div class="shoesContainer">
+			{% for row in shoes %}
+				
+				<div class="shoes"> 				
+					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>
+					<div class='legendBrand'>{{ row.brand.legend }}</div>
+					<div class="modelShoes">{{ row.model }}</div>					
+					<h5><strong>Size : {{ row.size }}</strong></h5>
+					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€</sup><span></strong> </div><br>
+								
+					<div class="moreDtails margin-bottom">
+						<a href="{{ path_for('details', {'id': row.id}) }}">More details</a>
+					</div>
+				</div>
+			{# {% else %}
+
+				<h2>No shoes in this shop</h2> #}
+			{% endfor %}			
+
+		{% if shoes is empty %}
+    		<div class="shoesEmpty">
+	        	<h3>No shoe matching your search.</h3>
+	    	</div>
+		{% endif %}
+		</div>		
+
+	{% endblock %}
