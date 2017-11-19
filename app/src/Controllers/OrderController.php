@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\User;
+use App\Models\Shoes;
 /**
 * The orders controller
 */
@@ -113,12 +114,12 @@ class OrderController extends BaseController
                 return $this->container->view->render($response, 'error.twig',['error' => 'You are not allowed to perform this action'] );
             }
 
-            $order->is_active = false;
+            $active_order->is_active = false;
             $new_active_order = new Order();
             $new_active_order->user_id = $_SESSION['isConnected']->id;
             $new_active_order->is_active = true;
             $new_active_order->save();
-            $order->save();
+            $active_order->save();
 
             return $response->withRedirect($this->container->router->pathFor('display_bag'));
 
