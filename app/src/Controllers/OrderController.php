@@ -122,7 +122,7 @@ class OrderController extends BaseController
             $active_order->save();
 
             $this->container->flash->addMessage("paymentSuccess","Your payment has been successfully registered");
-            return $response->withRedirect($this->container->router->pathFor('display_bag'));
+            return $response->withRedirect($this->container->router->pathFor('orders_list'));
 
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'You must be logged in to perform this action'] );

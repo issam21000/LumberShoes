@@ -17,12 +17,12 @@ final class ShoesController extends BaseController
 {
 
 
-    public function displayShoes(Request $request, Response $response, $args)
-    {
-        $shoes=Shoes::all();
-        $brand=Brand::all();
-        return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes,'brand'=>$brand]);
-    }
+    // public function displayShoes(Request $request, Response $response, $args)
+    // {
+    //     $shoes=Shoes::all();
+    //     $brand=Brand::all();
+    //     return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes,'brand'=>$brand]);
+    // }
 
     public function detailsShoes(Request $request, Response $response, $args)
     {
@@ -56,6 +56,8 @@ final class ShoesController extends BaseController
 
     public function searchShoes(Request $request, Response $response, $args){
         $brand = Brand::all();
+        $asc=false;
+        $desc=false;
         $search=$request->getParam('query');
          if(isset($_GET['search']) && $_GET['search'] == 'submit'){
             $shoes = Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->orWhereIn('brand_id', Brand::where('legend','like',"%$search%")->distinct()->get())->distinct()->get();
@@ -66,10 +68,20 @@ final class ShoesController extends BaseController
              if(isset($args['id'])){
                 $requestedBrand = Brand::find($args['id']);
                 $shoes = Shoes::where('brand_id', $args['id'])->orderBy('price_per_day', $request->getParam('orderByPrice'))->get();
-                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand, 'id'=>$args['id'], 'requestedBrand' => $requestedBrand] );
+                if($request->getParam('orderByPrice') == 'desc'){
+                  $desc = true;
+                }else if($request->getParam('orderByPrice') == 'asc'){
+                  $asc = true;
+                }
+                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand, 'id'=>$args['id'], 'requestedBrand' => $requestedBrand,'asc'=>$asc, 'desc'=>$desc] );
              }else{
                 $shoes = Shoes::orderBy('price_per_day', $request->getParam('orderByPrice'))->get();
-                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand]);
+                if($request->getParam('orderByPrice') == 'desc'){
+                  $desc = true;
+                }else if($request->getParam('orderByPrice') == 'asc'){
+                  $asc = true;
+                }
+                return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand,'asc'=>$asc, 'desc'=>$desc]);
              }
         }else{
             if(isset($args['id'])){

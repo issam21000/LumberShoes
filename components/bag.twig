@@ -12,13 +12,6 @@
 	{% block content %}
 
 	<h2 class="section-container">My Bag</h2>
-
-	{% if flash.getMessage('paymentSuccess')[0] %}
-			 <div class="alert alert-success">
-				<b>{{ flash.getMessage('paymentSuccess')[0] }}</b>
-			</div>
-	{% endif %}
-
 		<div class="container">
 			{% for orderLine in active_order.orderLines %}
 			<div class="row">
