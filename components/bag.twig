@@ -1,7 +1,7 @@
 {% extends 'templates/base_layout.twig' %}
 
 	{% block title %}
-		{{ parent() }} Mon panier
+		{{ parent() }} Bag
 	{% endblock %}
 
 
@@ -10,12 +10,16 @@
 
 
 	{% block content %}
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<h3>My Bag</h3>
-				</div>
+
+	<h2 class="section-container">My Bag</h2>
+
+	{% if flash.getMessage('paymentSuccess')[0] %}
+			 <div class="alert alert-success">
+				<b>{{ flash.getMessage('paymentSuccess')[0] }}</b>
 			</div>
+	{% endif %}
+
+		<div class="container">
 			{% for orderLine in active_order.orderLines %}
 			<div class="row">
 				<div class="col-md-6 col-sm-12 bag-line-container container">
@@ -58,8 +62,7 @@
 								<span>Total price: </span>{{ active_order.total_price }}€
 							</div>
 							<div class="col-md-4">
-								<form action="{{ path_for('validate_order') }}" method="post">
-									<input type="hidden" name="order_id" value="{{ active_order.id }}" />
+								<form action="{{ path_for('payment') }}" method="post">
 									<button type="submit" class="btn btn-success">Validate the order</button>
 								</form>
 							</div>

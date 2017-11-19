@@ -15,11 +15,11 @@ use Slim\Flash\Messages;
 
 final class ShoesController extends BaseController
 {
-    
+
 
     public function displayShoes(Request $request, Response $response, $args)
     {
-        $shoes=Shoes::all();        
+        $shoes=Shoes::all();
         $brand=Brand::all();
         return $this->container->view->render($response, 'shoes.twig',['shoes' => $shoes,'brand'=>$brand]);
     }
@@ -34,7 +34,7 @@ final class ShoesController extends BaseController
     public function bag(Request $request, Response $response, $args)
     {
         if(isset($_SESSION['isConnected'])){
-        	return $response->withRedirect("/shoes/bag");	
+        	return $response->withRedirect("/shoes/bag");
         }else{
         	$this->container->flash->addMessage('ErrorLoginBag','You must be logged to acces the bag');
        		return $response->withRedirect("/userRegister");
@@ -56,7 +56,7 @@ final class ShoesController extends BaseController
 
     public function searchShoes(Request $request, Response $response, $args){
         $brand = Brand::all();
-
+        $search=$request->getParam('query');
          if(isset($_GET['search']) && $_GET['search'] == 'submit'){
             $shoes = Shoes::where('model', 'like', "%$search%")->orWhere('description', 'like', "%$search%")->orWhereIn('brand_id', Brand::where('legend','like',"%$search%")->distinct()->get())->distinct()->get();
             return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> $brand] );

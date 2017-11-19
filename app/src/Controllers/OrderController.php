@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\User;
+use App\Models\Shoes;
 /**
 * The orders controller
 */
@@ -51,7 +52,7 @@ class OrderController extends BaseController
                 $orderLine->save();
                 $order->total_price = $order->total_price + $orderLine->total_price;
                 $order->save();
-
+                $this->container->flash->addMessage("addBag","Your item was added to bag, continue shopping or view your bag");
                 return $response->withRedirect($this->container->router->pathFor('details', array('id' => $postedData['shoes_id'])));
             }
 
@@ -113,13 +114,14 @@ class OrderController extends BaseController
                 return $this->container->view->render($response, 'error.twig',['error' => 'You are not allowed to perform this action'] );
             }
 
-            $order->is_active = false;
+            $active_order->is_active = false;
             $new_active_order = new Order();
             $new_active_order->user_id = $_SESSION['isConnected']->id;
             $new_active_order->is_active = true;
             $new_active_order->save();
-            $order->save();
+            $active_order->save();
 
+            $this->container->flash->addMessage("paymentSuccess","Your payment has been successfully registered");
             return $response->withRedirect($this->container->router->pathFor('display_bag'));
 
         }else{
@@ -156,6 +158,12 @@ class OrderController extends BaseController
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'The page you requested was not found'] );
         }
+    }
+
+
+    public function payment($request, $response, $args){
+
+      return $this->container->view->render($response, 'paymentForm.twig');
     }
 
 }

@@ -1,17 +1,13 @@
 {% extends 'templates/base_layout.twig' %}
 
 	{% block title %}
-		{{ parent() }} Mon panier
+		{{ parent() }} Orders
 	{% endblock %}
 
 
 	{% block content %}
+	<h2 class="section-container">My Orders</h2>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<h3>My Orders</h3>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-12">
 					{% if orders|length > 0 %}

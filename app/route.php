@@ -51,6 +51,9 @@ $app->post('/bag/add', 'OrderController:addToBag')->setName('add_to_bag');
 
 $app->get('/bag', 'OrderController:displayBag')->setName('display_bag');
 
+//payment
+$app->post('/bag/payment', 'OrderController:payment')->setName('payment');
+
 //Remove an orderLine from bag
 
 $app->get('/bag/remove/{id:[0-9]+}', 'OrderController:removeFromBag')->setName('remove_from_bag');
