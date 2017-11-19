@@ -475,3 +475,7 @@ input.searchBarShoes:focus {
 	font-size: 1.1em;
 	color: black;
 }
+
+#nearbyOrder > .form-group, #nearbyOrder > .form-group > div, #nearbyOrder > .form-group > label{
+	padding-left: 0;
+}

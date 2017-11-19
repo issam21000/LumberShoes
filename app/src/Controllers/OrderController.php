@@ -18,7 +18,12 @@ class OrderController extends BaseController
     */
     public function addToBag($request, $response, $args){
         if(isset($_SESSION['isConnected']) && $_SESSION['isConnected'] instanceof User){
-            $order = Order::where('is_active', true)->first();
+
+            $order = Order::where(array(
+                ['is_active', '=', true],
+                ['user_id', '=', $_SESSION['isConnected']->id]
+            ))->first();
+
             if(empty($order)){
                 $order = new Order();
                 $order->user_id = $_SESSION['isConnected']->id;
@@ -104,7 +109,10 @@ class OrderController extends BaseController
     public function validateOrder($request, $response, $args){
         if(isset($_SESSION['isConnected']) && $_SESSION['isConnected'] instanceof User){
 
-            $active_order = Order::where('is_active', true)->first();
+            $active_order = Order::where(array(
+                ['is_active', '=', true],
+                ['user_id', '=', $_SESSION['isConnected']->id]
+            ))->first();
 
             if(empty($active_order)){
                 return $this->container->view->render($response, 'error.twig',['error' => 'Order not found'] );
@@ -113,13 +121,12 @@ class OrderController extends BaseController
             if($active_order->user->id !== $_SESSION['isConnected']->id){
                 return $this->container->view->render($response, 'error.twig',['error' => 'You are not allowed to perform this action'] );
             }
-
             $active_order->is_active = false;
+            $active_order->save();
             $new_active_order = new Order();
             $new_active_order->user_id = $_SESSION['isConnected']->id;
             $new_active_order->is_active = true;
             $new_active_order->save();
-            $active_order->save();
 
             return $response->withRedirect($this->container->router->pathFor('display_bag'));
 

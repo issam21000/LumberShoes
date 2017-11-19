@@ -43,7 +43,7 @@
 					<li><a href="{{ path_for('shoes') }}">All shoes</a></li>
 
 					{% if session.isConnected %}
-						<li><a href="{{ path_for('display_bag') }}">My bag</a></li>
+						<li><a href="{{ path_for('display_bag') }}">My bag ({{bag_count}})</a></li>
 						<li><a href="{{ path_for('orders_list') }}">My Orders</a></li>
 					{% endif %}
 
