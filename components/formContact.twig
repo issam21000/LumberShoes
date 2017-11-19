@@ -11,7 +11,7 @@
 			{% if session.errorContact %}
    				 <div class="alert alert-danger">
 	   				 <b>{{ flash.getMessage('ErrorMessage')[0] }}</b>
-	   				{% for session in session.errorContact %}	
+	   				{% for session in session.errorContact %}
 	        		 	<p>{{ session }}</p>
 	        		 {% endfor %}
     			</div>
@@ -26,7 +26,7 @@
 			<div class="formContact">
 				<form name="contact"  method="post" action="{{ path_for('postContact') }}">
 
-						<div class="col-md-offset-2 col-md-7">			
+						<div class="col-md-offset-2 col-md-7">
 							<label for="name">Full name </label>
 							<span class="required">*</span><br>
 							<input class= form-control id="name" type="text" name="name" placeholder="Enter your name"/>
@@ -36,14 +36,14 @@
 						<div class="col-md-offset-2 col-md-7">
 							<label for="mail">Email adress </label>
 							<span class="required">*</span><br>
-							<input class= form-control id="mail" type="text" name="email" placeholder="Enter your email adress"><br>							
+							<input class= form-control id="mail" type="text" name="email" placeholder="Enter your email adress"><br>
 						</div>
 
 						<div class="col-md-offset-2 col-md-7">
 							<label for="sujet">Subject </label>
 							<span class="required">*</span><br>
-							<input class= form-control id="sujet" type="text" name="subject" placeholder="Subject"/><br>	
-						</div>	
+							<input class= form-control id="sujet" type="text" name="subject" placeholder="Subject"/><br>
+						</div>
 
 						<div class="row">
                   			<div class="col-md-offset-2 col-md-7">
@@ -58,8 +58,8 @@
 
 							<div class="col-md-offset-2">
 								<button class="btn btn-success" type="submit" value="submit" name="buttonSubmit">Submit</button>
-							</div>					
-						
+							</div>
+
 				</form>
 			</div>
 			<br>

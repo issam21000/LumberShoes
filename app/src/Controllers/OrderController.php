@@ -50,14 +50,14 @@ class OrderController extends BaseController
                 foreach ($orderLines as $ol) {
                     if(($orderLine->start_date > $ol->start_date && $orderLine->start_date < $ol->end_date)
                         || ($orderLine->end_date > $ol->start_date && $orderLine->end_date < $ol->end_date)){
-                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] ); 
+                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] );
                     }
                 }
 
                 $orderLine->save();
                 $order->total_price = $order->total_price + $orderLine->total_price;
                 $order->save();
-
+                $this->container->flash->addMessage("addBag","Your item was added to bag, continue shopping or view your bag");
                 return $response->withRedirect($this->container->router->pathFor('details', array('id' => $postedData['shoes_id'])));
             }
 
@@ -121,6 +121,7 @@ class OrderController extends BaseController
             if($active_order->user->id !== $_SESSION['isConnected']->id){
                 return $this->container->view->render($response, 'error.twig',['error' => 'You are not allowed to perform this action'] );
             }
+
             $active_order->is_active = false;
             $active_order->save();
             $new_active_order = new Order();
@@ -128,7 +129,8 @@ class OrderController extends BaseController
             $new_active_order->is_active = true;
             $new_active_order->save();
 
-            return $response->withRedirect($this->container->router->pathFor('display_bag'));
+            $this->container->flash->addMessage("paymentSuccess","Your payment has been successfully registered");
+            return $response->withRedirect($this->container->router->pathFor('orders_list'));
 
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'You must be logged in to perform this action'] );
@@ -164,6 +166,12 @@ class OrderController extends BaseController
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'The page you requested was not found'] );
         }
+    }
+
+
+    public function payment($request, $response, $args){
+
+      return $this->container->view->render($response, 'paymentForm.twig');
     }
 
 }

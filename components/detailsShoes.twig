@@ -3,24 +3,30 @@
 	{% block title %}
 		{{ parent() }} Details
 	{% endblock %}
-	
+
 
 	{% block content %}
 
-		<h2 class="section-container">Shoes details</h2>	
+		<h2 class="section-container">Shoes details</h2>
 
-		<div class="shoesDetailsContainer">	
+		{% if flash.getMessage('addBag')[0] %}
+				 <div class="alert alert-success">
+					<b>{{ flash.getMessage('addBag')[0] }}</b>
+				</div>
+		{% endif %}
 
-			<div class="shoesDetails" data-pid=""> 				
+		<div class="shoesDetailsContainer">
+
+			<div class="shoesDetails" data-pid="">
 				<img class="detailsShoesImage" src="/Assets/images/shoes/{{ shoes.image }}"><br>
 			</div>
 			<div class="descriptionShoes">
-				 <h3><strong>{{ shoes.brand.legend }}</strong></h3> 
+				 <h3><strong>{{ shoes.brand.legend }}</strong></h3>
 				 <p>{{ shoes.description }}</p>
 				 <hr id="hr">
 				 {% if shoes.is_reserved == 0 %}
 				 	<h3 class="available">Available !</h3>
-				{% else %} 	
+				{% else %}
 				 	<h3 class="notAvailable">Not available !</h3>
 				{% endif %}
 				 <div> <h5><strong>Size : {{ shoes.size }}</strong></h5> </div>
@@ -34,7 +40,7 @@
 					<a class="add-to-bag" data-shoes-id="{{ shoes.id }}" href="">Add to bag</a>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<!-- Modal -->
@@ -75,10 +81,10 @@
         </div>
 
 	{% endblock %}
-	
+
 
 	{% block custom_assets %}
-		<link rel="stylesheet" type="text/css" href="/Assets/css/bootstrap-datepicker.css">	
+		<link rel="stylesheet" type="text/css" href="/Assets/css/bootstrap-datepicker.css">
 		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.js"></script>
 		<script type="text/javascript" src="/Assets/js/bootstrap-datepicker.fr.js"></script>
 		<script type="text/javascript">
