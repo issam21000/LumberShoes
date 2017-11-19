@@ -44,7 +44,7 @@ class OrderController extends BaseController
                 foreach ($orderLines as $ol) {
                     if(($orderLine->start_date > $ol->start_date && $orderLine->start_date < $ol->end_date)
                         || ($orderLine->end_date > $ol->start_date && $orderLine->end_date < $ol->end_date)){
-                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] ); 
+                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] );
                     }
                 }
 
