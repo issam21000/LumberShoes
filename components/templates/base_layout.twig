@@ -33,10 +33,10 @@
    				 		<span>Welcome</span> {{ session.isConnected.full_name }}
    				 	</div>
 				{% endif %}
-			</div>	
-			
+			</div>
+
 			<div class="button">
-				<ul>				
+				<ul>
 
 					<li><a href="{{ path_for('index') }}">Home</a></li>
 					<li><a href="{{ path_for('all_shops') }}">My shop</a></li>
@@ -44,10 +44,11 @@
 
 					{% if session.isConnected %}
 						<li><a href="{{ path_for('display_bag') }}">My bag</a></li>
+
 						<li><a href="{{ path_for('orders_list') }}">My Orders</a></li>
 					{% endif %}
 
-				
+
 				</ul>
 			</div>
 		</header>
@@ -59,14 +60,12 @@
 		<footer>
 			<div>
 
-				<a class="lien-footer" href="{{ path_for('index') }}">Home -</a>  
-				<a class="lien-footer" href="{{ path_for('shoes') }}">All shoes -</a> 
-				<a class="lien-footer" href="{{ path_for('contact') }}">Contact us</a> 
+				<a class="lien-footer" href="{{ path_for('index') }}">Home -</a>
+				<a class="lien-footer" href="{{ path_for('shoes') }}">All shoes -</a>
+				<a class="lien-footer" href="{{ path_for('contact') }}">Contact us</a>
 
 				<p>© 2017 ShoesRental</p>
 			</div>
 		</footer>
 	</body>
 </html>
-
-

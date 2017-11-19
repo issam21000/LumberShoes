@@ -33,7 +33,6 @@ class OrderController extends BaseController
             $orderLine->start_date = \DateTime::createFromFormat('d/m/Y', $postedData['start_date']);
             $orderLine->end_date = \DateTime::createFromFormat('d/m/Y', $postedData['end_date']);
             $orderLine->total_price = $orderLine->start_date->diff($orderLine->end_date)->days * $shoes->price_per_day;
-
             if($orderLine->start_date >= new \DateTime()
                 && $orderLine->start_date < $orderLine->end_date){
                 $orderLines = OrderLine::where('shoes_id', $postedData['shoes_id'])->get();
@@ -48,17 +47,14 @@ class OrderController extends BaseController
                         return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] );
                     }
                 }
-
                 $orderLine->save();
                 $order->total_price = $order->total_price + $orderLine->total_price;
                 $order->save();
+
                 $this->container->flash->addMessage("addBag","Your item was added to bag, continue shopping or view your bag");
                 return $response->withRedirect($this->container->router->pathFor('details', array('id' => $postedData['shoes_id'])));
             }
-
-
             $orderLine->save();
-
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'You must be logged in to order'] );
         }
