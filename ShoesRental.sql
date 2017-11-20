@@ -18,7 +18,8 @@ SET time_zone = "+00:00";
 
 --
 -- Base de données :  `ShoesRental`
---
+-- user and password for test:
+-- user: admin@admin.fr    password:admin
 
 -- --------------------------------------------------------
 
