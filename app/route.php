@@ -69,3 +69,7 @@ $app->get('/orders', 'OrderController:getOldOrdersList')->setName('orders_list')
 //Display Order details (paid order)
 
 $app->get('/orders/{id:[0-9]+}', 'OrderController:getOldOrderDetails')->setName('order_details');
+
+//Display Shoes ordered by shop position (nearby shoes)
+
+$app->post('/shoes/nearby', 'ShoesController:getNearbyShoes')->setName('nearby_shoes');

@@ -95,4 +95,58 @@ final class ShoesController extends BaseController
         }
     }
 
+    /*
+    ** Get shoes ordered by shop position
+    */
+
+    public function getNearbyShoes($request, $response, $args){
+
+        if($request->isPost()){
+            $requestBody = $request->getParsedBody();
+            $userPosition = [
+                'lat' => $requestBody['latitude'],
+                'lng' => $requestBody['longitude']
+            ];
+
+            $shoes = Shoes::all();
+
+            $shoes = $shoes->sort(function($shoe_x, $shoe_y) use ($userPosition) {
+                if($shoe_x->shop->id == $shoe_y->shop->id){
+                    return true;
+                }
+
+                return $this->getDistanceBetween(
+                    ['lat' => $shoe_x->shop->latitude, 'lng' => $shoe_x->shop->longitude],
+                    $userPosition
+                ) > $this->getDistanceBetween(
+                    ['lat' => $shoe_y->shop->latitude, 'lng' => $shoe_y->shop->longitude],
+                    $userPosition
+                );
+
+            });
+
+            return $this->container->view->render($response, 'shoes.twig',['shoes'=> $shoes,'brand'=> Brand::all()] );
+        }
+
+    }
+
+    public function getDistanceBetween($pos1, $pos2){
+        $i = 0;
+        $R = 6371000;
+        $φ1 = deg2rad((float)$pos1['lat']);
+        $φ2 = 0;
+        $Δφ = 0;
+        $Δλ = 0;
+        $a = 0;
+        $c = 0;
+        $d = 0;
+        $φ2 = deg2rad((float)$pos2['lat']);
+        $Δφ = deg2rad((float)$pos1['lat'] - (float)$pos2['lat']);
+        $Δλ = deg2rad((float)$pos1['lng'] - (float)$pos2['lng']);
+        $a = sin($Δφ/2)*sin($Δφ/2) + cos($φ1)*cos($φ1)*sin($Δλ/2)*sin($Δλ/2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $d = $R * $c;
+        return $d;
+    }
+
 }
