@@ -4,19 +4,9 @@
 		{{ parent() }} Home
 	{% endblock %}
 
-	
-{% block custom_assets %}
-	<script>
-		$(document).on('change', '#brandForm', function(){
-		let val = $(this).find("select").val();
-		window.location.href = "/shoes/"+val;
-		});
 
-		$(document).on('change', '#priceForm', function(){
-		let val = $(this).find("select").val();
-		window.location.href = val;
-		});
-	</script>
+{% block custom_assets %}
+	<script type="text/javascript" src="/Assets/js/shoes.js"></script>
 	{% endblock %}
 	{% block content %}
 		{% if flash.getMessage('InfoDeconnected')[0] %}
@@ -36,9 +26,7 @@
 				<input class="searchBarShoes" type="text" name="query" placeholder="Search for a shoe">
 				<button class="btn btn-primary" type="submit" name="search" value="submit">Search</button>
 			</form>
-	
 
-		
 			<form id="brandForm">
 				<div class="styled-select slate">
 					<select name="brandSelect">
@@ -46,21 +34,30 @@
 						{% for row in brand %}
 							<option value="{{ row.id }}" {% if row.id ==id %} selected="selected" {% endif %}>{{ row.legend }}</option>
 						{% endfor %}
-						
+
 					</select>
 				</div>
 			</form>
-
+			
 			<form id="priceForm">
-				<label for="PrixTri">Sort by :</label>					
+				<label for="PrixTri">Sort by :</label>
 					<div class="styled-select slate">
 						<select id="priceSelect" name="priceSelect">
-							<option value="" >Price</option>
-							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=asc">Ascending price</option>
-							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=desc">Decreasing price</option>
-								
+							<option value="?orderByPrice=no" >Price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=asc" {% if asc == true %} selected="selected" {% endif %}>Ascending price</option>
+							<option value="{{(requestedBrand is null)?path_for('shoes') : path_for('brand', {id: requestedBrand.id})}}?orderByPrice=desc" {% if desc == true %} selected="selected" {% endif %}>Decreasing price</option>
+
 						</select>
-					</div>					
+					</div>
+			</form>
+			<hr>
+			<form id="nearbyOrder" action="{{path_for('nearby_shoes')}}" method="post">
+					<input type="hidden" name="latitude" id="latitude" value=""/>
+					<input type="hidden" name="longitude" id="longitude" value=""/>
+					<label class="">Display nearby shoes</label>
+					<div class="">
+						<button type="submit" name="submit" id="nearby-submit" class="btn btn-primary">Display</button>
+					</div>
 			</form>
 
 		</div>
@@ -68,14 +65,14 @@
 
 		<div class="shoesContainer">
 			{% for row in shoes %}
-				
-				<div class="shoes"> 				
+
+				<div class="shoes">
 					<img class="shoesImage" src="/Assets/images/shoes/{{ row.image }}"><br>
 					<div class='legendBrand'>{{ row.brand.legend }}</div>
-					<div class="modelShoes">{{ row.model }}</div>					
+					<div class="modelShoes">{{ row.model }}</div>
 					<h5><strong>Size : {{ row.size }}</strong></h5>
 					<div> <strong class="price">Price per day : <span>{{ row.price_per_day }}<sup>€</sup><span></strong> </div><br>
-								
+
 					<div class="moreDtails margin-bottom">
 						<a href="{{ path_for('details', {'id': row.id}) }}">More details</a>
 					</div>
@@ -83,13 +80,13 @@
 			{# {% else %}
 
 				<h2>No shoes in this shop</h2> #}
-			{% endfor %}			
+			{% endfor %}
 
 		{% if shoes is empty %}
     		<div class="shoesEmpty">
 	        	<h3>No shoe matching your search.</h3>
 	    	</div>
 		{% endif %}
-		</div>		
+		</div>
 
 	{% endblock %}

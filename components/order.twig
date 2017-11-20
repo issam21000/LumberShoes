@@ -1,7 +1,7 @@
 {% extends 'templates/base_layout.twig' %}
 
 	{% block title %}
-		{{ parent() }} Mon panier
+		{{ parent() }} Order details
 	{% endblock %}
 
 
@@ -10,12 +10,8 @@
 
 
 	{% block content %}
+	<h2 class="section-container">Order Details</h2>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<h3>Order Details</h3>
-				</div>
-			</div>
 			{% for orderLine in order.orderLines %}
 			<div class="row">
 				<div class="col-md-6 col-sm-12 bag-line-container container">
@@ -36,9 +32,6 @@
 							<div class="priceInfo">
 								<span>Price: </span>{{ orderLine.total_price }}€
 							</div>
-						</div>
-						<div class="col-md-3">
-							<a class="btn btn-danger" href="{{path_for('remove_from_bag', {id: orderLine.id})}}">Supprimer</a>
 						</div>
 					</div>
 				</div>

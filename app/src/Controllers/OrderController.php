@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\User;
+use App\Models\Shoes;
 /**
 * The orders controller
 */
@@ -17,7 +18,12 @@ class OrderController extends BaseController
     */
     public function addToBag($request, $response, $args){
         if(isset($_SESSION['isConnected']) && $_SESSION['isConnected'] instanceof User){
-            $order = Order::where('is_active', true)->first();
+
+            $order = Order::where(array(
+                ['is_active', '=', true],
+                ['user_id', '=', $_SESSION['isConnected']->id]
+            ))->first();
+
             if(empty($order)){
                 $order = new Order();
                 $order->user_id = $_SESSION['isConnected']->id;
@@ -32,7 +38,6 @@ class OrderController extends BaseController
             $orderLine->start_date = \DateTime::createFromFormat('d/m/Y', $postedData['start_date']);
             $orderLine->end_date = \DateTime::createFromFormat('d/m/Y', $postedData['end_date']);
             $orderLine->total_price = $orderLine->start_date->diff($orderLine->end_date)->days * $shoes->price_per_day;
-
             if($orderLine->start_date >= new \DateTime()
                 && $orderLine->start_date < $orderLine->end_date){
                 $orderLines = OrderLine::where('shoes_id', $postedData['shoes_id'])->get();
@@ -44,20 +49,17 @@ class OrderController extends BaseController
                 foreach ($orderLines as $ol) {
                     if(($orderLine->start_date > $ol->start_date && $orderLine->start_date < $ol->end_date)
                         || ($orderLine->end_date > $ol->start_date && $orderLine->end_date < $ol->end_date)){
-                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] ); 
+                        return $this->container->view->render($response, 'error.twig',['error' => 'Impossible de réserver dans la date séléctionnée'] );
                     }
                 }
-
                 $orderLine->save();
                 $order->total_price = $order->total_price + $orderLine->total_price;
                 $order->save();
 
+                $this->container->flash->addMessage("addBag","Your item was added to bag, continue shopping or view your bag");
                 return $response->withRedirect($this->container->router->pathFor('details', array('id' => $postedData['shoes_id'])));
             }
-
-
             $orderLine->save();
-
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'You must be logged in to order'] );
         }
@@ -103,7 +105,10 @@ class OrderController extends BaseController
     public function validateOrder($request, $response, $args){
         if(isset($_SESSION['isConnected']) && $_SESSION['isConnected'] instanceof User){
 
-            $active_order = Order::where('is_active', true)->first();
+            $active_order = Order::where(array(
+                ['is_active', '=', true],
+                ['user_id', '=', $_SESSION['isConnected']->id]
+            ))->first();
 
             if(empty($active_order)){
                 return $this->container->view->render($response, 'error.twig',['error' => 'Order not found'] );
@@ -113,14 +118,15 @@ class OrderController extends BaseController
                 return $this->container->view->render($response, 'error.twig',['error' => 'You are not allowed to perform this action'] );
             }
 
-            $order->is_active = false;
+            $active_order->is_active = false;
+            $active_order->save();
             $new_active_order = new Order();
             $new_active_order->user_id = $_SESSION['isConnected']->id;
             $new_active_order->is_active = true;
             $new_active_order->save();
-            $order->save();
 
-            return $response->withRedirect($this->container->router->pathFor('display_bag'));
+            $this->container->flash->addMessage("paymentSuccess","Your payment has been successfully registered");
+            return $response->withRedirect($this->container->router->pathFor('orders_list'));
 
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'You must be logged in to perform this action'] );
@@ -156,6 +162,12 @@ class OrderController extends BaseController
         }else{
             return $this->container->view->render($response, 'error.twig',['error' => 'The page you requested was not found'] );
         }
+    }
+
+
+    public function payment($request, $response, $args){
+
+      return $this->container->view->render($response, 'paymentForm.twig');
     }
 
 }
