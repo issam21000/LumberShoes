@@ -94,7 +94,7 @@ final class ShoesController extends BaseController
              }
         }
     }
-    
+
     /*
     ** Get shoes ordered by shop position
     */
