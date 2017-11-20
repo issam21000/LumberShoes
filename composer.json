@@ -1,14 +1,19 @@
 {
-    "name": "zhiephie/boilerplate-slim3",
-    "description": "Boilerplate for getting started with Slim Framework",
+    "name": "issam21000/lumberjack_rental",
+    "description": "Lumberjack Shoes Rental Plateform",
     "keywords": ["Slim", "Eloquent", "Monolog", "Twig", "Framework"],
-    "homepage": "https://github.com/zhiephie/boilerplate-slim3",
+    "homepage": "https://github.com/issam21000/lumberjack_rental",
     "license": "MIT",
     "authors": [
         {
-            "name": "Yudi Purwanto",
-            "email": "yp@timexstudio.com",
-            "homepage": "http://www.timexstudio.com"
+            "name": "Mohamed ALHASNE",
+            "email": "alhasne.mohamed@gmail.com",
+            "github": "https://github.com/alhasnecode"
+        },
+        {
+            "name": "Issam MEDJMADJ",
+            "email": "issam21000@live.fr",
+            "github": "https://github.com/issam21000"
         }
     ],
     "autoload": {
